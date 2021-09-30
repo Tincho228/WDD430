@@ -4,9 +4,8 @@
     <button class="btn btn-success">New Contact</button>
   </div>
   <div style="padding:20px" >
-    <div class="panel-body" style="border:1px solid #ddd" *ngFor="let contact of contacts">
-      Bro. {{contact.name}}
-      <img src="{{contact.imageUrl}}" style="width:100px" class="img-thumbnail" alt="image of {{contact.name}}">
-    </div>
+      <cms-contact-item  *ngFor="let contactEl of contacts" 
+      [contact]="contactEl"
+      (selectedContactEvent)="selectedContact(contactEl)"></cms-contact-item>
 </div>
 </div>
