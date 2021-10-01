@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
-  <cms-header></cms-header>
-  <cms-contacts></cms-contacts>
-  <cms-documents></cms-documents>
-  <cms-messages></cms-messages>
+  <cms-header (featureSelected)="onNavigate($event)"></cms-header>
+  <cms-contacts *ngIf="loadedFeature ==='contacts'"></cms-contacts>
+  <cms-documents *ngIf="loadedFeature ==='documents'"></cms-documents>
+  <cms-messages *ngIf="loadedFeature ==='messages'"></cms-messages>
 </div>
