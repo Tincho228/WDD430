@@ -12,7 +12,4 @@ export class DocumentsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  hello(){
-    console.log("hello");
-  }
 }
