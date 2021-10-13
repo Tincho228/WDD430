@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 
@@ -6,25 +6,25 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
   providedIn: 'root'
 })
 export class ContactService {
+
+  contactSelectedEvent = new EventEmitter<Contact>(); 
+
   contacts:Contact[]=[];
   constructor() { 
     this.contacts = MOCKCONTACTS;
   }
+  /* get the full list of contacts*/
   getContacts():Contact[]{
     return this.contacts.slice();
   }
-  /* get a specific contact by id */
 
-  getContact(id:string):Contact[]{
-    return this.contacts.filter(contact => contact.id === id);
-    // getContact(id: string): Contact {
-    //   FOR each contact in the contacts list
-    //   IF contact.id equals the id THEN
-    //   RETURN contact
-    //   ENDIF
-    //   ENDFOR
-    //   RETURN null
-    //  } 
-    
+
+  /* get a specific contact by id */
+  getContact(id:string):Contact{
+    if(this.contacts.filter(contact => contact.id === id)[0]){
+      return this.contacts.filter(contact => contact.id === id)[0];
+    }else{
+      return null;
+    }
   }
 }
