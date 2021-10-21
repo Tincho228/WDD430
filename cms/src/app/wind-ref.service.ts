@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class WindRefService {
 
   constructor() { }
+
+  getNativeWindow() {
+    return window;
+ }
 }
