@@ -11,7 +11,8 @@
   </div>
   <div class="panel-body">
     <div class="center-panel">
-      <cms-document-item *ngFor="let documentEl of documents" 
+      <cms-document-item *ngFor="let documentEl of documents; let i=index" 
+      [index] = "i"
       [document]="documentEl"></cms-document-item>
     </div>
   </div>

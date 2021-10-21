@@ -14,4 +14,7 @@ export class DocumentService {
   getDocuments():Document[]{
     return this.documents.slice();
   }
+  getDocument(id:number){
+    return this.documents[id];
+  }
 }
