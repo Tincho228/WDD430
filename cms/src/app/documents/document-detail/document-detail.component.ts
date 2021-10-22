@@ -32,7 +32,6 @@ export class DocumentDetailComponent implements OnInit {
     
     if(this.document.url){
       this.nativeWindow.open(this.document.url);
-      console.log(this.nativeWindow)
     }
   }
   onDelete() {
