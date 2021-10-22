@@ -3,9 +3,10 @@
     Contacts
     <button class="btn btn-success" routerLink="new">New Contact</button>
   </div>
-  <div style="padding:20px" >
-      <cms-contact-item  *ngFor="let contactEl of contacts" 
+  <ul class="list group" style="padding:20px" >
+      <cms-contact-item  *ngFor="let contactEl of contacts; let i=index"
       [contact]="contactEl"
+      [index]="i"
       ></cms-contact-item>
-</div>
+  </ul>
 </div>

@@ -11,10 +11,21 @@ export class ContactListComponent implements OnInit {
   
   contacts : Contact[] = []
   constructor(private contactService:ContactService) {
+    
    }
 
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts();
+    /*this.documentService.documentChangedEvent.subscribe(
+      (documents:Document[])=>{
+        this.documents = documents;
+      }
+    )*/
+    this.contactService.contactChangedEvent.subscribe(
+      (contacts:Contact[])=>{
+        this.contacts = contacts;
+      }
+    )
   }
   
 }
