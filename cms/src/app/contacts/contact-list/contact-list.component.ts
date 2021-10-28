@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Contact } from '../contact.model'
 import { ContactService } from '../contact.service';
 @Component({
@@ -7,8 +8,8 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-list.component.css'],
   
 })
-export class ContactListComponent implements OnInit {
-  
+export class ContactListComponent implements OnInit, OnDestroy {
+  subscription:Subscription;
   contacts : Contact[] = []
   constructor(private contactService:ContactService) {
     
@@ -16,11 +17,14 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts();
-    this.contactService.contactChangedEvent.subscribe(
+    this.subscription = this.contactService.contactChangedEvent.subscribe(
       (contacts:Contact[])=>{
         this.contacts = contacts;
       }
     )
+  }
+  ngOnDestroy():void {
+    this.subscription.unsubscribe();
   }
   
 }
