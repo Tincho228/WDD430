@@ -8,17 +8,22 @@ import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 })
 export class DocumentService {
   documentSelectedEvent = new EventEmitter<Document>();
-  documentChangedEvent = new Subject<Document[]>();
+  documentListChangedEvent = new Subject<Document[]>();
   documents:Document[]=[];
+  maxDocumentId:number;
   constructor() {
     this.documents = MOCKDOCUMENTS;
-   }
+    this.maxDocumentId = this.getMaxId();
+  }
+
   getDocuments():Document[]{
     return this.documents.slice();
   }
+
   getDocument(id:number){
     return this.documents[id];
   }
+
   deleteDocument(document: Document) {
     if (!document) {
        return;
@@ -28,6 +33,29 @@ export class DocumentService {
        return;
     }
     this.documents.splice(pos, 1);
-    this.documentChangedEvent.next(this.documents.slice());
- }
+    this.documentListChangedEvent.next(this.documents.slice());
+  }
+  addDocument(newDocument:Document){
+    if(!newDocument) {
+      return;
+    }
+    this.maxDocumentId++
+    newDocument.id = this.maxDocumentId;
+    this.documents.push(newDocument);
+    const documentsClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsClone);
+    
+  }
+ 
+  getMaxId():number { 
+    let maxId = 0;  
+    MOCKDOCUMENTS.forEach(document =>{
+      let currentId = parseInt(document.id) /* convert to a number */
+      if(currentId>maxId){
+      maxId = currentId;
+    }
+    
+    })
+    return maxId;
+  }
 }
