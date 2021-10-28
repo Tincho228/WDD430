@@ -35,6 +35,7 @@ export class DocumentService {
     this.documents.splice(pos, 1);
     this.documentListChangedEvent.next(this.documents.slice());
   }
+
   addDocument(newDocument:Document){
     if(!newDocument) {
       return;
@@ -58,4 +59,19 @@ export class DocumentService {
     })
     return maxId;
   }
+  updateDocument(originalDocument: Document, newDocument: Document) {
+
+    if(!originalDocument || !newDocument || newDocument === null){
+      return;
+    }
+    let pos = this.documents.indexOf(originalDocument);
+    if (pos < 0) {
+      return;
+    }
+    newDocument.id = originalDocument.id;
+    this.documents[pos] = newDocument;
+    const documentsListClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsListClone);  
+  }
+
 }
