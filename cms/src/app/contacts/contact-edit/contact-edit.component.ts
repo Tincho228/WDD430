@@ -74,13 +74,14 @@ export class ContactEditComponent implements OnInit {
   addToGroup($event:any){
     const selectedContact:Contact=$event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
-    console.log(invalidGroupContact);
     if(invalidGroupContact){
       this.noDraggable = true;
       return;
     }
     this.noDraggable = false;
     this.groupContacts.push(selectedContact);
+    /* UPDATE THE CONTACT INTO THE SERVICE */
+    
   }
   onRemoveItem(index: number) {
     if (index < 0 || index >= this.groupContacts.length) {
