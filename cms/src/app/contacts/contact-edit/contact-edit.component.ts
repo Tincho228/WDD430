@@ -15,6 +15,7 @@ export class ContactEditComponent implements OnInit {
   groupContacts: Contact[] = [];
   editMode:boolean = false;
   id:string;
+  noDraggable:boolean = false;
   constructor(
     private contactService:ContactService,
     private router:Router,
@@ -36,7 +37,6 @@ export class ContactEditComponent implements OnInit {
       this.contact = JSON.parse(JSON.stringify(this.originalContact));
       if(this.originalContact.group){
         this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
-        console.log(this.groupContacts);
       }
       
     })
@@ -55,16 +55,18 @@ export class ContactEditComponent implements OnInit {
   onCancel(){
     this.router.navigate(["./contacts"])
   }
-  isInvalidContact(newContact:Contact){
-    if(!newContact){
+  isInvalidContact(newContact: Contact) {
+    
+    if (!newContact) {// newContact has no value
       return true;
     }
-    if(this.contact && newContact.id === this.contact.id){
-      return true;
+    if (this.contact && newContact.id === this.contact.id) {
+       return true;
     }
     for (let i = 0; i < this.groupContacts.length; i++){
-      if (newContact.id === this.groupContacts[i].id) {
-        return true;
+       
+       if (newContact.id === this.groupContacts[i].id) {
+         return true;
       }
     }
     return false;
@@ -72,14 +74,19 @@ export class ContactEditComponent implements OnInit {
   addToGroup($event:any){
     const selectedContact:Contact=$event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
+    console.log(invalidGroupContact);
     if(invalidGroupContact){
-      this.groupContacts.push(selectedContact);
+      this.noDraggable = true;
+      return;
     }
+    this.noDraggable = false;
+    this.groupContacts.push(selectedContact);
   }
   onRemoveItem(index: number) {
     if (index < 0 || index >= this.groupContacts.length) {
        return;
     }
+    this.noDraggable = false;
     this.groupContacts.splice(index, 1);
   }
 }

@@ -75,8 +75,14 @@
       </div>
 
       <div class="row">
-        <div class="form-group">
+        <div class=" col-sm-12 form-group">
           <label for="groupList">Group Contacts:</label>
+          <div 
+            class="alert alert-danger"
+            *ngIf="noDraggable">
+            Contact can not be added to the group. It is already in group or is the current contact.
+          </div>
+          
 
           <div 
             class="row" 
