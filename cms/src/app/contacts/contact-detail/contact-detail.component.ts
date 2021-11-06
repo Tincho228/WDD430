@@ -9,6 +9,8 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-detail.component.css']
 })
 export class ContactDetailComponent implements OnInit {
+  groupContacts:Contact[] = [];
+  originalContact:Contact;
   contact:Contact;
   id:number;
   constructor(
@@ -20,8 +22,13 @@ export class ContactDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       (params:Params)=>{
+        this.groupContacts=[];
         this.id = +params['id']
-        this.contact = this.contactService.getContactByIndex(this.id);
+        this.originalContact = this.contactService.getContactByIndex(this.id);
+        this.contact = JSON.parse(JSON.stringify(this.originalContact));
+        if(this.originalContact.group){
+          this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
+        }
       }
     )
   }
