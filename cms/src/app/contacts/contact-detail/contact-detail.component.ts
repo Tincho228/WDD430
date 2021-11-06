@@ -10,7 +10,6 @@ import { ContactService } from '../contact.service';
 })
 export class ContactDetailComponent implements OnInit {
   groupContacts:Contact[] = [];
-  originalContact:Contact;
   contact:Contact;
   id:number;
   constructor(
@@ -24,10 +23,9 @@ export class ContactDetailComponent implements OnInit {
       (params:Params)=>{
         this.groupContacts=[];
         this.id = +params['id']
-        this.originalContact = this.contactService.getContactByIndex(this.id);
-        this.contact = JSON.parse(JSON.stringify(this.originalContact));
-        if(this.originalContact.group){
-          this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
+        this.contact = this.contactService.getContactByIndex(this.id);
+        if(this.contact.group){
+          this.groupContacts = JSON.parse(JSON.stringify(this.contact.group));
         }
       }
     )
