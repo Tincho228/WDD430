@@ -81,7 +81,8 @@ export class ContactEditComponent implements OnInit {
     this.noDraggable = false;
     this.groupContacts.push(selectedContact);
     /* UPDATE THE CONTACT INTO THE SERVICE */
-    
+    this.contact.group = this.groupContacts;
+    this.contactService.updateContact(this.originalContact,this.contact);
   }
   onRemoveItem(index: number) {
     if (index < 0 || index >= this.groupContacts.length) {
@@ -89,5 +90,8 @@ export class ContactEditComponent implements OnInit {
     }
     this.noDraggable = false;
     this.groupContacts.splice(index, 1);
+    /* UPDATE THE CONTACT INTO THE SERVICE */
+    this.contact.group = this.groupContacts;
+    this.contactService.updateContact(this.originalContact,this.contact)
   }
 }
