@@ -44,7 +44,7 @@ export class ContactEditComponent implements OnInit {
   onSubmit(form:NgForm){
     const value = form.value;
     
-    var newContact = new Contact(this.id, value.name, value.email, value.phone, value.imageUrl, null )
+    var newContact = new Contact(this.id, value.name, value.email, value.phone, value.imageUrl, this.groupContacts )
     if(this.editMode === true){
       this.contactService.updateContact(this.originalContact, newContact);
     }else{
@@ -80,9 +80,7 @@ export class ContactEditComponent implements OnInit {
     }
     this.noDraggable = false;
     this.groupContacts.push(selectedContact);
-    /* UPDATE THE CONTACT INTO THE SERVICE */
-    this.contact.group = this.groupContacts;
-    this.contactService.updateContact(this.originalContact,this.contact);
+    
   }
   onRemoveItem(index: number) {
     if (index < 0 || index >= this.groupContacts.length) {
@@ -90,8 +88,6 @@ export class ContactEditComponent implements OnInit {
     }
     this.noDraggable = false;
     this.groupContacts.splice(index, 1);
-    /* UPDATE THE CONTACT INTO THE SERVICE */
-    this.contact.group = this.groupContacts;
-    this.contactService.updateContact(this.originalContact,this.contact)
+   
   }
 }
