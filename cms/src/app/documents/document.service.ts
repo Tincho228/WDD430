@@ -64,7 +64,8 @@ export class DocumentService {
        return;
     }
     this.documents.splice(pos, 1);
-    this.documentListChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
+    //this.documentListChangedEvent.next(this.documents.slice());
   }
 
   addDocument(newDocument:Document){
@@ -74,8 +75,7 @@ export class DocumentService {
     this.maxDocumentId++
     newDocument.id = this.maxDocumentId;
     this.documents.push(newDocument);
-    const documentsClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsClone);
+    this.storeDocuments();
     
   }
  
@@ -101,15 +101,21 @@ export class DocumentService {
     }
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);  
+    this.storeDocuments();
+    // const documentsListClone = this.documents.slice();
+    // this.documentListChangedEvent.next(documentsListClone);  
   }
   storeDocuments(){
     const headers = new HttpHeaders({'Content-type':'application/json'})
     const convertedDocuments = JSON.stringify(this.documents);
-    this.http.put('https://angularproject-d66ee-default-rtdb.firebaseio.com/documents.json', convertedDocuments),
+    this.http
+    .put('https://angularproject-d66ee-default-rtdb.firebaseio.com/documents.json', convertedDocuments,
     {
       headers: headers
     }
+    )
+    .subscribe(response => {
+      this.documentListChangedEvent.next(this.documents.slice());
+    })   
   }
 }
