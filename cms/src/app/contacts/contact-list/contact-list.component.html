@@ -32,10 +32,10 @@
     </div>
   </div>
   <ul class="list group" style="padding:20px" >
-      <cms-contact-item  *ngFor="let contactEl of contacts | contactsFilter:term ; let i=index"
+      <cms-contact-item  *ngFor="let contactEl of contacts | contactsFilter:term"
       [contact]="contactEl"
       [term]="term"
-      [index]="i"
+      [contact_id]="contactEl.id"
       dnd-draggable
       [dragEnabled]="true"
       [dragData]="contactEl"

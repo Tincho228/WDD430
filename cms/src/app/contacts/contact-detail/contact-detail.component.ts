@@ -11,7 +11,7 @@ import { ContactService } from '../contact.service';
 export class ContactDetailComponent implements OnInit {
   groupContacts:Contact[] = [];
   contact:Contact;
-  id:number;
+  id:string;
   constructor(
               private route:ActivatedRoute,
               private contactService:ContactService,
@@ -22,8 +22,9 @@ export class ContactDetailComponent implements OnInit {
     this.route.params.subscribe(
       (params:Params)=>{
         this.groupContacts=[];
-        this.id = +params['id']
-        this.contact = this.contactService.getContactByIndex(this.id);
+        const id_number = +params['id']
+        this.id = id_number.toString();
+        this.contact = this.contactService.getContact(this.id)
         if(this.contact.group){
           this.groupContacts = JSON.parse(JSON.stringify(this.contact.group));
         }
