@@ -46,9 +46,7 @@ export class DocumentService {
       } 
      
    );
-   
     return this.documents.slice();
-   
   }
 
   getDocument(id:number){
@@ -81,8 +79,8 @@ export class DocumentService {
  
   getMaxId():number { 
     let maxId = 0;  
-    MOCKDOCUMENTS.forEach(document =>{
-      let currentId = parseInt(document.id) /* convert to a number */
+    this.documents.forEach(document =>{
+      let currentId = (document.id) /* convert to a number */
       if(currentId>maxId){
       maxId = currentId;
     }
@@ -102,8 +100,6 @@ export class DocumentService {
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
     this.storeDocuments();
-    // const documentsListClone = this.documents.slice();
-    // this.documentListChangedEvent.next(documentsListClone);  
   }
   storeDocuments(){
     const headers = new HttpHeaders({'Content-type':'application/json'})

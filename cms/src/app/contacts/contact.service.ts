@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -47,6 +46,22 @@ export class ContactService {
    );
     return this.contacts.slice();
   }
+  awaitContact(id:string, callback){
+    this.http
+   .get('https://angularproject-d66ee-default-rtdb.firebaseio.com/contacts.json')
+   .subscribe(
+      // success method
+      (contacts: Contact[] ) => {
+          this.contacts = contacts;
+          const waitedContact = this.getContact(id)
+          callback(waitedContact)   
+      }
+   );
+  }
+
+
+
+
   /* get a specific contact by index - THIS IS USED IN THE CONTACTS COMPONENT*/
   getContactByIndex(index:number){
     return this.contacts[index];
@@ -73,7 +88,7 @@ export class ContactService {
   }
   getMaxId():number { 
     let maxId = 0;  
-    MOCKCONTACTS.forEach(document =>{
+    this.contacts.forEach(document =>{
       let currentId = parseInt(document.id) /* convert to a number */
       if(currentId>maxId){
       maxId = currentId;
