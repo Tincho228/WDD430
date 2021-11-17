@@ -46,18 +46,6 @@ export class ContactService {
    );
     return this.contacts.slice();
   }
-  awaitContact(id:string, callback){
-    this.http
-   .get('https://angularproject-d66ee-default-rtdb.firebaseio.com/contacts.json')
-   .subscribe(
-      // success method
-      (contacts: Contact[] ) => {
-          this.contacts = contacts;
-          const waitedContact = this.getContact(id)
-          callback(waitedContact)   
-      }
-   );
-  }
 
 
 

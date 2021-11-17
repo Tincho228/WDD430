@@ -15,7 +15,6 @@ export class MessageListComponent implements OnInit {
 
   ngOnInit(): void {
     this.messages=this.messagesService.getMessages();
-    this.waitedContacts = 
     this.messagesService.messageChangedEvent.subscribe( 
       (messages:Message[])=>{
         this.messages = messages;

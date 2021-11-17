@@ -10,7 +10,7 @@ import { MessageService } from '../../message.service';
 export class MessageEditComponent implements OnInit {
   @ViewChild('subject') subjectRef: ElementRef;
   @ViewChild('msgText') msgTextRef: ElementRef;
-  currentSender = '101';
+  currentSender = '19';
   constructor(private messageService:MessageService) { }
 
   ngOnInit(): void {
