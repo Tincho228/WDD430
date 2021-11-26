@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start:server":"nodemon server.js"
+    "start:server": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,8 @@
     "bootstrap": "^3.4.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
+    "mongodb": "^4.2.0",
+    "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
     "ng2-dnd": "^5.0.2",
     "rxjs": "~6.6.0",
