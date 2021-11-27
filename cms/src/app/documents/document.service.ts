@@ -13,13 +13,12 @@ export class DocumentService {
   documents:Document[]=[];
   maxDocumentId:number;
   constructor(private http:HttpClient) {
-    //this.documents = MOCKDOCUMENTS;
     this.maxDocumentId = this.getMaxId();
   }
 
   getDocuments():Document[]{
    this.http
-   .get('https://angularproject-d66ee-default-rtdb.firebaseio.com/documents.json')
+   .get('http://localhost:3000/documents')
    .subscribe(
       // success method
       (documents: Document[] ) => {
@@ -38,6 +37,7 @@ export class DocumentService {
             return 0;
           }
           // emit the next document list change event
+            
           this.documentListChangedEvent.next(this.documents.slice()); 
       },
       // error method
@@ -46,7 +46,9 @@ export class DocumentService {
       } 
      
    );
+    
     return this.documents.slice();
+    
   }
 
   getDocument(id:number){
@@ -63,17 +65,35 @@ export class DocumentService {
     }
     this.documents.splice(pos, 1);
     this.storeDocuments();
-    //this.documentListChangedEvent.next(this.documents.slice());
   }
 
   addDocument(newDocument:Document){
     if(!newDocument) {
       return;
     }
-    this.maxDocumentId++
-    newDocument.id = this.maxDocumentId;
-    this.documents.push(newDocument);
-    this.storeDocuments();
+
+
+    // this.maxDocumentId++
+    // newDocument.id = this.maxDocumentId;
+    // this.documents.push(newDocument);
+    // this.storeDocuments();
+  
+      // make sure id of the new Document is empty
+      newDocument.id = null;
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+  
+      // add to database
+      this.http.post<{ message: string, newDocument: Document }>('http://localhost:3000/documents',
+        document,
+        { headers: headers })
+        .subscribe(
+          (responseData) => {
+            // add new document to documents
+            this.documents.push(responseData.newDocument);
+            this.documentListChangedEvent.next(this.documents.slice());
+          }
+        );
+    
     
   }
  
