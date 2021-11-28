@@ -4,21 +4,22 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/', (req, res, next) => {
-    Document.find()
-        .then(documents => {
-        res.status(200)({
-            message: "Documents fetched successfully"
-        })
-        res.json(documents)
-        })
-        .catch(error => {
-            res.status(500).json({
-            message: 'An error occurred',
-            error: error
-          });
-         });
- });
+router.get("/", (req, res, next) => {
+  Document.find()
+    .then((documents) => {
+      console.log(documents)
+      res.status(200).json({
+        documents: documents,
+        message: "Document fetched successfully",
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "An error occurred",
+        error: error,
+      });
+    });
+});
 
 
 router.post('/', (req, res, next) => {
