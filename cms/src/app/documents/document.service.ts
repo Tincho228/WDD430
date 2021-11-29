@@ -11,6 +11,7 @@ export class DocumentService {
   documentListChangedEvent = new Subject<Document[]>();
   documents:Document[]=[];
   maxDocumentId:number;
+  result:Document;
   constructor(private http:HttpClient) {
     this.maxDocumentId = this.getMaxId();
   } 
@@ -65,7 +66,7 @@ export class DocumentService {
        return;
     }
     this.documents.splice(pos, 1);
-    this.storeDocuments();
+    
   }
 
   addDocument(newDocument:Document){
@@ -73,24 +74,37 @@ export class DocumentService {
       return;
     }
 
-
-    // this.maxDocumentId++
-    // newDocument.id = this.maxDocumentId;
-    // this.documents.push(newDocument);
-    // this.storeDocuments();
-  
       // make sure id of the new Document is empty
       newDocument.id = null;
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
   
       // add to database
       this.http.post<{ message: string, newDocument: Document }>('http://localhost:3000/documents',
-        document,
+        newDocument,
         { headers: headers })
         .subscribe(
           (responseData) => {
             // add new document to documents
-            this.documents.push(responseData.newDocument);
+            var data=[]
+            for(var i in responseData){
+              data.push([i,responseData[i]])
+            }
+            this.documents.push(data[1][1])
+            console.log(this.documents)
+            
+          // sort the array
+          this.documents.sort(compare)
+          function compare(a:Document, b:Document) {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name < b.name) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          }
+          // // emit the next document list change event
             this.documentListChangedEvent.next(this.documents.slice());
           }
         );
@@ -120,19 +134,7 @@ export class DocumentService {
     }
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
-    this.storeDocuments();
+    
   }
-  storeDocuments(){
-    const headers = new HttpHeaders({'Content-type':'application/json'})
-    const convertedDocuments = JSON.stringify(this.documents);
-    this.http
-    .put('https://angularproject-d66ee-default-rtdb.firebaseio.com/documents.json', convertedDocuments,
-    {
-      headers: headers
-    }
-    )
-    .subscribe(response => {
-      this.documentListChangedEvent.next(this.documents.slice());
-    })   
-  }
+  
 }

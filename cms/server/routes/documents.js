@@ -8,7 +8,6 @@ router.get("/", (req, res, next) => {
 
   Document.find()
     .then((documents) => {
-      console.log(documents)
       res.status(200).json({
         documents: documents,
         message: "Documents fetched successfully",
