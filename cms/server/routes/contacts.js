@@ -5,12 +5,14 @@ var router = express.Router();
 
 router.get('/', (req, res, next) => {
     Contact.find()
-        .populate('group')
+        //.populate('group')
         .then(contacts => {
-        res.status(200)({
+          console.log("fetching contacts")
+          console.log(contacts)
+        res.status(200).json({
+            contacts:contacts,
             message: "Contacts fetched successfully"
         })
-        res.json(contacts)
         })
         .catch(error => {
             res.status(500).json({

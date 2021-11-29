@@ -13,18 +13,23 @@ export class DocumentService {
   maxDocumentId:number;
   constructor(private http:HttpClient) {
     this.maxDocumentId = this.getMaxId();
-  }
-
+  } 
   getDocuments():Document[]{
    this.http
    .get('http://localhost:3000/documents')
    .subscribe(
       // success method
       (documents: Document[] ) => {
-          this.documents = documents;
+          //converting json object into an array
+          var result=[]
+          for(var i in documents){
+            result.push([i,documents[i]])
+          }
+          this.documents = result[0][1]
           this.maxDocumentId = this.getMaxId();
+          
           // sort the array
-          documents.sort(compare)
+          this.documents.sort(compare)
           function compare(a:Document, b:Document) {
             if (a.name < b.name) {
               return -1;
@@ -35,8 +40,7 @@ export class DocumentService {
             // a must be equal to b
             return 0;
           }
-          // emit the next document list change event
-            
+          // // emit the next document list change event
           this.documentListChangedEvent.next(this.documents.slice()); 
       },
       // error method
@@ -45,9 +49,7 @@ export class DocumentService {
       } 
      
    );
-    
     return this.documents.slice();
-    
   }
 
   getDocument(id:number){

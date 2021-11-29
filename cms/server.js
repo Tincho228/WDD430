@@ -9,7 +9,10 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 // establish a connection to the mongo database
-mongoose.connect('mongodb://localhost:27017/cms',
+//diRuqMvkWCbdP9oQ
+//mongoose.connect('mongodb://localhost:27017/cms',
+//mongodb+srv://martin:<password>@cluster0.qqql5.mongodb.net/test
+mongoose.connect('mongodb+srv://martin:diRuqMvkWCbdP9oQ@cluster0.qqql5.mongodb.net/cms',
    { useNewUrlParser: true }, (err, res) => {
       if (err) {
          console.log('Connection failed: ' + err);

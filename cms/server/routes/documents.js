@@ -3,14 +3,15 @@ const Document = require('../models/document');
 var express = require('express');
 var router = express.Router();
 
-
 router.get("/", (req, res, next) => {
+  console.log("fetfching documents")
+
   Document.find()
     .then((documents) => {
       console.log(documents)
       res.status(200).json({
         documents: documents,
-        message: "Document fetched successfully",
+        message: "Documents fetched successfully",
       });
     })
     .catch((error) => {
@@ -31,7 +32,7 @@ router.post('/', (req, res, next) => {
       description: req.body.description,
       url: req.body.url
     });
-  
+    console.log(req.body.name)
     document.save()
       .then(createdDocument => {
         res.status(201).json({

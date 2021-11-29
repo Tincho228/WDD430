@@ -17,12 +17,13 @@ export class ContactService {
   /* get the full list of contacts*/
   getContacts():Contact[]{
     this.http
-   .get('https://angularproject-d66ee-default-rtdb.firebaseio.com/contacts.json')
+   .get('https://localhost:3000/contacts')
    .subscribe(
       // success method
       (contacts: Contact[] ) => {
           this.contacts = contacts;
           this.maxContactId = this.getMaxId();
+          console.log(this.contacts)
           // sort the array
           contacts.sort(compare)
           function compare(a:Contact, b:Contact) {

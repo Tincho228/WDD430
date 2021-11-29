@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const contactSchema = mongoose.Schema({
-   id: { type: String, required: true },
+   id: { type: String },
    name: { type: String },
-   email: { type: String, required: true },
-   phone: { type: Array},
-   imageUrl: { type:String },
+   email: { type: String },
+   phone: { type:String },
+   imageUrl:{ type:String },
    group: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contact' }]
 });
 

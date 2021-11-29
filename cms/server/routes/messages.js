@@ -8,9 +8,9 @@ router.get('/', (req, res, next) => {
     Message.find()
         .then(messages => {
         res.status(200)({
+            messages:messages,
             message: "Messages fetched successfully"
         })
-        res.json(messages)
         })
         .catch(error => {
             res.status(500).json({

@@ -15,7 +15,7 @@ export class MessageService {
    }
   getMessages():Message[]{
     this.http
-   .get('https://angularproject-d66ee-default-rtdb.firebaseio.com/messages.json')
+   .get('http://localhost:3000/messages')
    .subscribe(
       // success method
       (messages: Message[] ) => {

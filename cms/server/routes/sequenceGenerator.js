@@ -15,10 +15,10 @@ function SequenceGenerator() {
           error: err
         });
       }
-      // sequenceId = sequence._id;
-      // maxDocumentId = sequence.maxDocumentId;
-      // maxMessageId = sequence.maxMessageId;
-      // maxContactId = sequence.maxContactId;
+      sequenceId = sequence._id;
+      maxDocumentId = sequence.maxDocumentId;
+      maxMessageId = sequence.maxMessageId;
+      maxContactId = sequence.maxContactId;
     });
 }
 

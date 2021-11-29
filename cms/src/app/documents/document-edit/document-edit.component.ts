@@ -22,7 +22,6 @@ export class DocumentEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params:Params)=>{
       this.id = params["id"];
-      console.log(this.id)
       if((this.id === undefined) || (this.id === null)){
         this.editMode = false;
         return;

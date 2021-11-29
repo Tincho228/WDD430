@@ -10,8 +10,9 @@ export class DocumentItemComponent implements OnInit {
   
   @Input() document:Document;
   @Input() index:number;
-
+  
   ngOnInit(): void {
+    
   }
   
 }
