@@ -10,7 +10,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next) {
-    console.log("Logging in")
+    const {name, password} = req.body
+    console.log(name)
+    console.log(password)
     res.send("Please sign up")
 });
 
