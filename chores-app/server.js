@@ -27,13 +27,14 @@ mongoose.connect('mongodb+srv://martin:diRuqMvkWCbdP9oQ@cluster0.qqql5.mongodb.n
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
 var index = require('./src/server/routes/app');
 const userRoutes = require('./src/server/routes/user');
+const todoRoutes = require('./src/server/routes/todo');
 // const contactRoutes = require('./server/routes/contacts');
 // const documentsRoutes = require('./server/routes/documents');
 
 
 
 var app = express(); // create an instance of express
-
+var cors = require('cors')
 
 
 // Tell express to use the following parsers for POST data
@@ -41,6 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use(cors())
 //app.use(cookieParser());
 
 //app.use(logger('dev')); // Tell express to use the Morgan logger
@@ -66,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'dist/cms')));
 // Tell express to map the default route ('/') to the index route
 app.use('/', index);
 app.use('/user',userRoutes);
-// app.use('/contacts',contactRoutes);
+app.use('/todo',todoRoutes);
 // app.use('/documents',documentsRoutes);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
