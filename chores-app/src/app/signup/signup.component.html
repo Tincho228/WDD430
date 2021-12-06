@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row justify-content-center" style="margin:30px 0">
       <div class="col-md-4">
-      <h1 class="text-info">Sign in</h1>
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <h1 class="text-info">Sign up</h1>
+        <form (ngSubmit)="onSignup(f)" #f="ngForm">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nombre</label>
             <input [ngModel]= "user?.name"

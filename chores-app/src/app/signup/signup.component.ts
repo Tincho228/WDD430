@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSubmit(form:NgForm){
+  onSignup(form:NgForm){
     const value = form.value;
     
     var newUser = new User(value.name, value.password)

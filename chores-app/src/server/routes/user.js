@@ -30,10 +30,11 @@ router.post('/signup', function(req, res, next) {
     newUser.save()
     .then(createdUser => {
         const token = jwt.sign({_id: newUser._id, }, 'secretKey')
-        console.log(token)
         res.status(201).json({
-          message: 'Document added successfully',
-          document: createdUser
+          token:token,
+          message: 'User added successfully',
+          user: createdUser
+          
         });
         
       })
@@ -47,28 +48,31 @@ router.post('/signup', function(req, res, next) {
 });
 router.post('/signin', function(req, res, next){
     const { name, password } = req.body;
-    console.log(name,password)
     User.findOne({name:name})
     .then(user => {
         const userFounded = user;
-        if(!user)
-        res.status(401).send (
-            'No user found'
-        )
+        console.log(user)
+        if((!user) || (user === null))
+        res.status(401).json ({
+            message:'No user found'
+
+        })
         if(user.password !== password)
-        res.status(401).send (
-            'Password incorrect'
-        )    
+        res.status(401).json ({
+            message:'Password incorrect'
+            
+        })    
         const token = jwt.sign({_id:user._id}, 'secretKey');
         return res.status(200).json({
-            token
+            message:'Sign in successfully',
+            token:token
         })
         
       })
       .catch(error => {
         res.status(500).json({
           message: 'User not found.',
-          error: { user: 'Contact not found'}
+          error: { user: 'User not found'}
         });
       });
 })

@@ -1,1 +1,31 @@
-<p>Sign in works</p>
+<div class="container">
+    <div class="row justify-content-center" style="margin:30px 0">
+      <div class="col-md-4">
+      <h1 class="text-info">Sign in</h1>
+        <form (ngSubmit)="onSignin(f)" #f="ngForm">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nombre</label>
+            <input [ngModel]= "user?.name"
+                   type="text" 
+                   class="form-control" 
+                   id="exampleInputname" 
+                   name="name"
+                   aria-describedby="nameHelp" 
+                   autofocus
+                   required>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" 
+                   class="form-control" 
+                   id="exampleInputPassword1"
+                   name="password"
+                   required
+                   [ngModel]= "user?.password">
+          </div>
+          
+          <button type="submit" class="btn btn-block btn-info">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

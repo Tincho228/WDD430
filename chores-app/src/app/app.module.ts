@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { PrivateComponent } from './private/private.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserGuard } from './user.guard';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserGuard
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
