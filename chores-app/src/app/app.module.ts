@@ -11,6 +11,8 @@ import { PrivateComponent } from './private/private.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserGuard } from './user.guard';
 import { TokenInterceptorService } from './users/token-interceptor.service';
+import { TodosItemComponent } from './todos/todos-item/todos-item.component';
+import { TodosDetailComponent } from './todos/todos-detail/todos-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { TokenInterceptorService } from './users/token-interceptor.service';
     TodosComponent,
     SignupComponent,
     SigninComponent,
-    PrivateComponent
+    PrivateComponent,
+    TodosItemComponent,
+    TodosDetailComponent,
   ],
   imports: [
     BrowserModule,

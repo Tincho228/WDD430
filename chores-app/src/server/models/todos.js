@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const todoSchema = mongoose.Schema({
    name: { type: String },
-   descripption: { type: String },
+   description: { type: String },
 },{
    timestamps:true
 }

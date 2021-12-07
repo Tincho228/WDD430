@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     
     const {name, description} = req.body
+    console.log(description)
     const newTodo = new Todo ({
         name:name,
         description:description

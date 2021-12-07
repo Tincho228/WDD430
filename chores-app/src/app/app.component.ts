@@ -7,8 +7,13 @@ import { UserService } from './users/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  logged:Boolean
   title = 'chores-app';
   constructor(
     public userService:UserService
   ){ }
+  ngOnInit(): void {
+   
+  }  
+
 }
