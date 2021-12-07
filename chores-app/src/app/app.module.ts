@@ -8,8 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { PrivateComponent } from './private/private.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserGuard } from './user.guard';
+import { TokenInterceptorService } from './users/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,12 @@ import { UserGuard } from './user.guard';
     HttpClientModule
   ],
   providers: [
-    UserGuard
+    UserGuard,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi:true
+    }
   ],
   
   bootstrap: [AppComponent]

@@ -53,24 +53,25 @@ router.post('/signin', function(req, res, next){
         const userFounded = user;
         console.log(user)
         if((!user) || (user === null))
-        res.status(401).json ({
+        return res.status(401).json ({
             message:'No user found'
 
         })
         if(user.password !== password)
-        res.status(401).json ({
+        return res.status(401).json ({
             message:'Password incorrect'
             
         })    
         const token = jwt.sign({_id:user._id}, 'secretKey');
-        return res.status(200).json({
+        console.log(req.headers)
+        res.status(200).json({
             message:'Sign in successfully',
             token:token
         })
         
       })
       .catch(error => {
-        res.status(500).json({
+        return res.status(500).json({
           message: 'User not found.',
           error: { user: 'User not found'}
         });

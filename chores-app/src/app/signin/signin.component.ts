@@ -22,6 +22,5 @@ export class SigninComponent implements OnInit {
     
     var newUser = new User(value.name, value.password)
     this.userService.signIn(newUser)
-    //this.userService.signUp(newUser)
   }
 }

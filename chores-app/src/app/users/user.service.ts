@@ -13,29 +13,32 @@ export class UserService {
     ) { }
 
   signUp(user:User){
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<{ message: string, user: Document, token:string }>(this.URL + "/signup", user, { headers: headers })
+    return this.http.post<{ message: string, user: Document, token:string }>(this.URL + "/signup", user)
     .subscribe(
       (responseData) => {
-        console.log(responseData);
         localStorage.setItem("token", responseData.token)
         this.router.navigate(['/private'])
       }
     )
   }
   signIn(user:User){
-    console.log("The service is receiving " , user)
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<{ message: string, token: string }>(this.URL + "/signin", user, { headers: headers })
+    return this.http.post<{ message: string, token: string }>(this.URL + "/signin", user)
     .subscribe(
       (responseData) => {
-        console.log(responseData);
         localStorage.setItem("token", responseData.token)
+        
         this.router.navigate(['/private'])
       }
     )
   }
   loggedIn():Boolean{
     return !!localStorage.getItem('token')
+  }
+  getToken(){
+    return localStorage.getItem("token")
+  }
+  logOut(){
+    localStorage.removeItem("token")
+    this.router.navigate(['/signin'])
   }
 }
