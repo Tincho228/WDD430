@@ -35,7 +35,7 @@ router.post('/signup', function(req, res, next) {
         res.status(201).json({
           token:token,
           message: 'User added successfully',
-          user: createdUser
+          userId: createdUser.id
           
         });
         
@@ -64,10 +64,11 @@ router.post('/signin', function(req, res, next){
             message:'Password incorrect'
             
         })    
-        const token = jwt.sign({_id:user._id}, 'secretKey');
+        const token = jwt.sign({id:user.id}, 'secretKey');
         res.status(200).json({
             message:'Sign in successfully',
-            token:token
+            token:token,
+            userId:user.id
         })
         
       })

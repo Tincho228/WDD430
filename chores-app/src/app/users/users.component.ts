@@ -20,7 +20,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.subscription = this.userItemService.userListChangedEvent.subscribe(
       (users)=>{
         this.users = users
-        console.log(users)
       }
     )
   }

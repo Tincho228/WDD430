@@ -16,15 +16,21 @@ export class UserService {
     return this.http.post<{ message: string, user: Document, token:string }>(this.URL + "/signup", user)
     .subscribe(
       (responseData) => {
+        var currentUser = JSON.stringify(responseData)
+        localStorage.setItem("currentUser", currentUser)
         localStorage.setItem("token", responseData.token)
         this.router.navigate(['/private'])
       }
     )
   }
   signIn(user:User){
-    return this.http.post<{ message: string, token: string }>(this.URL + "/signin", user)
+    return this.http.post<{ message: string, token: string, userId:number }>(this.URL + "/signin", user)
     .subscribe(
       (responseData) => {
+        
+        
+        localStorage.setItem("userId", JSON.stringify(responseData.userId))
+        
         localStorage.setItem("token", responseData.token)
         
         this.router.navigate(['/private'])
@@ -37,8 +43,12 @@ export class UserService {
   getToken(){
     return localStorage.getItem("token")
   }
+  getUserId():number{
+    return JSON.parse(localStorage.getItem("userId"))
+  }
   logOut(){
     localStorage.removeItem("token")
+    localStorage.removeItem("userId")
     this.router.navigate(['/signin'])
   }
 }

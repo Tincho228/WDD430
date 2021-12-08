@@ -16,7 +16,8 @@ const appRoutes:Routes = [
     },
     {
          path:'todos', 
-         component:TodosComponent
+         component:TodosComponent,
+         canActivate:[UserGuard]
     },
     {
          path:'users', 
