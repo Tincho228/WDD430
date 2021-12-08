@@ -1,6 +1,40 @@
 <div class="list-group-item  d-flex justify-content-between">
-<a class="" routerLinkActive="active">{{todo.name}} -
-Description: {{todo.description}}</a>
+  <a class="" routerLinkActive="active">{{todo.name}} -{{todo.id}} - {{todo.executer_id}}
+    Description: {{todo.description}}</a>
 
-<button class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add this chore</button>
+  <!-- Button trigger modal -->
+  <ng-container *ngIf="executer; else template">
+    <button class="btn btn-secondary" data-toggle="modal" [attr.data-target]="'#'+ todo.name" disabled>
+        {{executer.name}}´s got it!
+      </button>
+  </ng-container>
+  <ng-template #template>
+    <button class="btn btn-success" data-toggle="modal" [attr.data-target]="'#'+ todo.name">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Do it!
+      </button>
+  </ng-template>
+  
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id={{todo.name}} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Start the chore {{todo.name}}.
+        Are ayou sure?
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-info">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

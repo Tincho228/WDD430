@@ -29,7 +29,6 @@ var index = require('./src/server/routes/app');
 const userRoutes = require('./src/server/routes/user');
 const todoRoutes = require('./src/server/routes/todo');
 // const contactRoutes = require('./server/routes/contacts');
-// const documentsRoutes = require('./server/routes/documents');
 
 
 

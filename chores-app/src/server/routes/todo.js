@@ -23,11 +23,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     
-    const {name, description} = req.body
-    console.log(description)
+    const {id, name, description, executer_id} = req.body
     const newTodo = new Todo ({
+        id:id,
         name:name,
-        description:description
+        description:description,
+        executer_id:executer_id
     })
     newTodo.save()
     .then(createdTodo => {

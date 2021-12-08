@@ -13,6 +13,7 @@ import { UserGuard } from './user.guard';
 import { TokenInterceptorService } from './users/token-interceptor.service';
 import { TodosItemComponent } from './todos/todos-item/todos-item.component';
 import { TodosDetailComponent } from './todos/todos-detail/todos-detail.component';
+import { UserItemComponent } from './users/user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TodosDetailComponent } from './todos/todos-detail/todos-detail.componen
     PrivateComponent,
     TodosItemComponent,
     TodosDetailComponent,
+    UserItemComponent,
   ],
   imports: [
     BrowserModule,

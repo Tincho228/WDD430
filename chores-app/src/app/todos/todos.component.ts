@@ -20,7 +20,6 @@ export class TodosComponent implements OnInit, OnDestroy {
     this.subscription = this.todosService.documentListChangedEvent.subscribe(
       (todos)=>{
         this.todos = todos
-        console.log(this.todos)
       }
     )
 

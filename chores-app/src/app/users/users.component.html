@@ -1,1 +1,12 @@
-<p>users works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+        <h1>My family Ranking</h1>
+        <div class="row justify-content-between">
+            <app-user-item *ngFor="let user of users"
+            [user]="user"></app-user-item>    
+        </div>
+        
+    </div>
+    </div>
+</div>

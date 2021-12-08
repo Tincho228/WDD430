@@ -15,10 +15,9 @@ export class TodosService {
     private http:HttpClient
   ) { }
   getTodos(){
-    this.http.get<{name:String,description:String}[]>(this.URL)
+    this.http.get<{id:Number;name:String,description:String, executer_id:Number}[]>(this.URL)
     .subscribe(
       (data:Todo[])=>{
-        
         //Converting into an object
         var result=[]
           for(var i in data){
@@ -35,6 +34,9 @@ export class TodosService {
     )
     return this.todos.slice();
   }
+
+  //
+  
 }
 
   

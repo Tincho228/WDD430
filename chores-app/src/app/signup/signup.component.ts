@@ -10,14 +10,15 @@ import { UserService } from '../users/user.service';
 })
 export class SignupComponent implements OnInit {
   user:User
+  id:number
   constructor(private userService : UserService) { }
 
   ngOnInit(): void {
   }
   onSignup(form:NgForm){
     const value = form.value;
-    
-    var newUser = new User(value.name, value.password)
+    this.id = Date.now()
+    var newUser = new User(this.id,value.name, value.password,false)
     this.userService.signUp(newUser)
   }
 }

@@ -22,14 +22,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next) {
-    const {name, password} = req.body
+    const {id, name, password, admin} = req.body
     const newUser = new User ({
+        id:id,
         name:name,
-        password:password
+        password:password,
+        admin:admin
     })
     newUser.save()
     .then(createdUser => {
-        const token = jwt.sign({_id: newUser._id, }, 'secretKey')
+        const token = jwt.sign({id: newUser.id, }, 'secretKey')
         res.status(201).json({
           token:token,
           message: 'User added successfully',
@@ -63,7 +65,6 @@ router.post('/signin', function(req, res, next){
             
         })    
         const token = jwt.sign({_id:user._id}, 'secretKey');
-        console.log(req.headers)
         res.status(200).json({
             message:'Sign in successfully',
             token:token
@@ -166,7 +167,7 @@ function verifyToken(req, res, next) {
     // Verifying token
     const payload = jwt.verify(token, 'secretKey')
     // Exracting User token information
-    req.userId = payload._id
+    req.userId = payload.id
 
     next()
 

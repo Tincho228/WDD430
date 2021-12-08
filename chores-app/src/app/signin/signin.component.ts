@@ -10,7 +10,6 @@ import { UserService } from '../users/user.service';
 })
 export class SigninComponent implements OnInit {
   user:User
-  
   constructor(
     private userService:UserService
   ) { }
@@ -19,8 +18,7 @@ export class SigninComponent implements OnInit {
   }
   onSignin(form:NgForm){
     const value = form.value;
-    
-    var newUser = new User(value.name, value.password)
+    var newUser = new User(null,value.name, value.password,false)
     this.userService.signIn(newUser)
   }
 }
