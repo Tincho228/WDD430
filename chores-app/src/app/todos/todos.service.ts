@@ -45,6 +45,9 @@ export class TodosService {
       return null;
     }
   }
+  getTodoByExecuter(id:number){
+    return this.todos.filter(todo => todo.executer_id === id)
+  }
 
   startTodo(originalTodo:Todo, userId:number) {
     if (!originalTodo || !userId) {
@@ -61,8 +64,8 @@ export class TodosService {
         newTodo.executer_id = userId
         //Converting into an object
         this.todos[pos] = newTodo
-        console.log(this.todos)
         this.documentListChangedEvent.next(this.todos.slice())
+        this.router.navigate(['/private'])
       },
       (
         (error:any)=>{
@@ -70,10 +73,9 @@ export class TodosService {
         }
       )
     )
-    
-    
   }
   
+
 }
 
   

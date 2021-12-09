@@ -1,6 +1,6 @@
 <div class="list-group-item  d-flex justify-content-between">
   <a class="" routerLinkActive="active">{{todo.name}} -{{todo.id}} - {{todo.executer_id}}
-    Description: {{todo.description}}</a>
+    Description: {{todo.description}}  <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span></a>
 
   <!-- Button trigger modal -->
   <ng-container *ngIf="executer; else template">

@@ -33,5 +33,4 @@ export class TodosItemComponent implements OnInit {
     this.originalTodo = this.todoService.getTodoById(todo_id)
     this.todoService.startTodo(this.originalTodo,this.userId)
   }
-
 }
