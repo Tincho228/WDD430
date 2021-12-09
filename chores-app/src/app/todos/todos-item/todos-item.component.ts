@@ -3,6 +3,7 @@ import { UserItemService } from 'src/app/users/user-item.service';
 import { User } from 'src/app/users/user.model';
 import { UserService } from 'src/app/users/user.service';
 import { Todo } from '../todo.model';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todos-item',
@@ -14,10 +15,13 @@ export class TodosItemComponent implements OnInit {
   users:User[]=[]
   executer:User
   userId:number
+  originalTodo:Todo
+  
 
   constructor(
     private userItemService:UserItemService,
-    private userService:UserService
+    private userService:UserService,
+    private todoService:TodosService
   ) { }
 
   async ngOnInit() {
@@ -26,7 +30,8 @@ export class TodosItemComponent implements OnInit {
   }
   onStart(todo_id){
     this.userId = this.userService.getUserId()
-    
+    this.originalTodo = this.todoService.getTodoById(todo_id)
+    this.todoService.startTodo(this.originalTodo,this.userId)
   }
 
 }

@@ -46,6 +46,35 @@ router.post('/', function(req, res, next) {
       });
     
 });
+
+//Update a todo
+router.put('/:id', (req, res, next) => {
+  
+  Todo.findOne({ id: req.params.id })
+    .then(todo => {
+      todo.executer_id = req.body.userId;
+      Todo.updateOne({ id: req.params.id }, todo)
+        .then(result => {
+          res.status(204).json({
+            message: 'Document updated successfully'
+          })
+        })
+        .catch(error => {
+           res.status(500).json({
+           message: 'An error occurred',
+           error: error
+         });
+        });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: 'Document not found.',
+        error: { document: 'Document not found'}
+      });
+    });
+});
+
+
 router.delete("/:id", (req, res, next) => {
     Todo.findOne({ id: req.params.id })
       .then(todo => {

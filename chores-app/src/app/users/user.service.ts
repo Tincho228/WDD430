@@ -24,6 +24,7 @@ export class UserService {
     )
   }
   signIn(user:User){
+    console.log(user)
     return this.http.post<{ message: string, token: string, userId:number }>(this.URL + "/signin", user)
     .subscribe(
       (responseData) => {
