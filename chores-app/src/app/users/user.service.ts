@@ -29,7 +29,6 @@ export class UserService {
     .subscribe(
       (responseData) => {
         
-        
         localStorage.setItem("userId", JSON.stringify(responseData.userId))
         
         localStorage.setItem("token", responseData.token)

@@ -38,6 +38,31 @@ export class TodosService {
     )
     return this.todos.slice();
   }
+  waitedTodos():any{
+    return new Promise(
+      (resolve, reject)=>{
+        this.http.get(this.URL)
+        .subscribe(
+          (data:Todo[])=>{
+        
+          //Converting into an object
+          var result=[]
+            for(var i in data){
+              result.push([i,data[i]])
+            }
+            this.todos = result[1][1]
+          this.documentListChangedEvent.next(this.todos.slice());
+          resolve(this.todos.slice());
+        },
+        (
+          (error:any)=>{
+          console.log(error)
+        }
+      )
+    )
+      }
+    )
+  }
   getTodoById(id:number):Todo{
     if(this.todos.filter(todo => todo.id === id)[0]){
       return this.todos.filter(todo => todo.id === id)[0];

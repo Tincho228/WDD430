@@ -1,1 +1,23 @@
-<p>private works!</p>
+<div class="container">
+    <div class="row justify-content-center" style="margin:30px 0">
+      <div class="col-lg-8 col-sm-12">
+        <h1 *ngIf="currentUser.name">Hi {{currentUser.name}}</h1>
+        <div class="card" style="width: 10rem; margin:10px auto">
+            <img src="../../../assets/images/kidone.png" 
+                class="card-img-top" 
+                alt="image"        
+                >
+          </div>
+        <h2 class="text-info">My Todo´s</h2>    
+            <!-- <div class="row justify-content-around">
+              <app-private-item *ngFor="let todo of todos" [todo]="todo"></app-private-item>
+            </div> -->
+            <div class="list-group">
+                <app-private-item *ngFor="let todo of myTodos" [todo]="todo"></app-private-item>
+          </div>
+
+      </div>
+      
+    </div>
+  </div>
+  

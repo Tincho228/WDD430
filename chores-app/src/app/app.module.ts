@@ -14,6 +14,8 @@ import { TokenInterceptorService } from './users/token-interceptor.service';
 import { TodosItemComponent } from './todos/todos-item/todos-item.component';
 import { TodosDetailComponent } from './todos/todos-detail/todos-detail.component';
 import { UserItemComponent } from './users/user-item/user-item.component';
+import { PrivateItemComponent } from './private/private-item/private-item.component';
+import { PrivateProfileComponent } from './private/private-profile/private-profile.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { UserItemComponent } from './users/user-item/user-item.component';
     TodosItemComponent,
     TodosDetailComponent,
     UserItemComponent,
+    PrivateItemComponent,
+    PrivateProfileComponent,
   ],
   imports: [
     BrowserModule,

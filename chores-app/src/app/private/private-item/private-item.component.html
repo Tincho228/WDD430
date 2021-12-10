@@ -1,0 +1,27 @@
+<!-- <div class="card" style="width: 18rem; margin-bottom:10px">
+    <img src="../../../assets/images/kidone.png" class="card-img-top" alt="image of {{todo.name}}">
+    <div class="card-body">
+      <h5 class="card-title">{{todo.name}}</h5>
+      <p class="card-text">{{todo.description}}</p>
+      <p class="badge badge-info" style="font-size: 30px;">${{todo.price}}</p>
+      <a class="btn btn-primary" style="cursor: pointer;">Go somewhere</a>
+    </div>
+  </div> -->
+  <div class="list-group-item  d-flex justify-content-between">
+    <a class="" routerLinkActive="active">{{todo.name}}
+      Description: {{todo.description}}  <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span></a>
+  
+    <!-- Button trigger modal -->
+    <!-- <ng-container *ngIf="executer; else template">
+      <button class="btn btn-secondary" data-toggle="modal" [attr.data-target]="'#'+ todo.name" disabled>
+          {{executer.name}}´s got it!
+        </button>
+    </ng-container>
+    <ng-template #template>
+      <button class="btn btn-success" data-toggle="modal" [attr.data-target]="'#'+ todo.name">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          Do it!
+        </button>
+    </ng-template> -->
+    
+  </div>
