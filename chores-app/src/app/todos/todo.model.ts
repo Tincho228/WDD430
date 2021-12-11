@@ -6,7 +6,8 @@ export class Todo {
         public name: string,
         public description:string,
         public executer_id:number,
-        public price:number
+        public price:number,
+        public status:string
        
 ) { }
 }

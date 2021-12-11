@@ -5,7 +5,8 @@ const todoSchema = mongoose.Schema({
    name: { type: String },
    description: { type: String },
    executer_id: { type:Number, default:null },
-   price: { type: Number }
+   price: { type: Number },
+   status: { type:String, default:"available" }
 },{
    timestamps:true
 }

@@ -1,39 +1,123 @@
-<div class="list-group-item  d-flex justify-content-between">
-  <a class="" routerLinkActive="active">{{todo.name}} -{{todo.id}} - {{todo.executer_id}}
-    Description: {{todo.description}}  <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span></a>
+<div class="list-group-item " style="margin-bottom:10px">
 
-  <!-- Button trigger modal -->
-  <ng-container *ngIf="executer; else template">
-    <button class="btn btn-secondary" data-toggle="modal" [attr.data-target]="'#'+ todo.name" disabled>
-        {{executer.name}}´s got it!
-      </button>
-  </ng-container>
-  <ng-template #template>
-    <button class="btn btn-success" data-toggle="modal" [attr.data-target]="'#'+ todo.name">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Do it!
-      </button>
-  </ng-template>
-  
-</div>
+  <!-- Option available -->
+  <div class="row d-flex justify-content-around align-items-center" *ngIf="todo.status==='available'">
+    <div>
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <img class="img-fluid" src="../../../assets/images/available.png" style="width:60px; height:auto;">
+      <p class="text-secondary" style="font-size:20px">Available...</p>
+    </div>
+    <div>
 
 
-<!-- Modal -->
-<div class="modal fade" id={{todo.name}} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Start the chore {{todo.name}}.
-        Are ayou sure?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" (click)="onStart(todo.id)" data-dismiss="modal">Start Chore</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <!-- Button trigger modal -->
+      <ng-container *ngIf="executer; else template">
+        <button class="btn btn-secondary" data-toggle="modal" [attr.data-target]="'#'+ todo.id" disabled>
+          {{executer.name}} got it!
+        </button>
+      </ng-container>
+      <ng-template #template>
+        <p class="text-dark" style="font-size:30px">Can be<br> yours!!!</p>
+        <button class="btn btn-success" data-toggle="modal" [attr.data-target]="'#modal'+ todo.id">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          Do it!
+        </button>
+      </ng-template>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Start the chore {{todo.name}}.
+            Are ayou sure?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" (click)="onStart(todo.id)" data-dismiss="modal">Start
+              Chore</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!-- Option incomplete -->
+  <div class="row d-flex justify-content-around align-items-center" *ngIf="todo.status==='incomplete'">
+    <div>
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      {{todo.status}}
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <div class="loader"></div>
+      <p class="text-secondary" style="font-size:20px">Completing....</p>
+    </div>
+    <div>
+      <ng-container *ngIf="executer;">
+        <button class="btn btn-secondary" disabled>
+          {{executer.name}}´s got it!
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Option under approval -->
+  <div class="row d-flex justify-content-around align-items-center" *ngIf="todo.status==='waiting'">
+    <div>
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <img class="img-fluid" src="../../../assets/images/waiting.png" style="width:60px; display:block; margin:0 auto"
+        alt="waiting image">
+      <p class="text-secondary" style="font-size:20px">Waiting approval...</p>
+    </div>
+    <div>
+      <p class="text-dark" style="font-size:30px">Almoust<br> done!!!</p>
+      <ng-container *ngIf="executer;">
+        <button class="btn btn-secondary" disabled>
+          {{executer.name}}´s got it!
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+
+  <!-- Option completed -->
+  <div class="row d-flex justify-content-around" *ngIf="todo.status==='completed'">
+    <div>
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <img class="img-fluid" src="../../../assets/images/completed.png" style="width:60px; height:auto"
+        alt="completed image">
+      <p class="text-secondary" style="font-size:20px">Completed</p>
+    </div>
+    <div>
+      <p class="text-dark" style="font-size:30px">Congratulations!!!</p>
+      <ng-container *ngIf="executer;">
+        <button class="btn btn-secondary" disabled>
+          {{executer.name}}´s got it!
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+
 </div>

@@ -74,18 +74,19 @@ export class TodosService {
     return this.todos.filter(todo => todo.executer_id === id)
   }
 
-  startTodo(originalTodo:Todo, userId:number) {
-    if (!originalTodo || !userId) {
+  startTodo(originalTodo:Todo, userId:number, status:string) {
+    if (!originalTodo || !userId || !status) {
       return;
     }
     const pos = this.todos.findIndex(d => d.id === originalTodo.id);
     if (pos < 0) {
       return;
     }
-    return this.http.put<Todo>(this.URL + "/"+ originalTodo.id, {userId:userId})
+    return this.http.put<Todo>(this.URL + "/"+ originalTodo.id, {userId:userId, status:status})
     .subscribe(
       (responseData) => {
         const newTodo = originalTodo
+        newTodo.status =status
         newTodo.executer_id = userId
         //Converting into an object
         this.todos[pos] = newTodo

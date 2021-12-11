@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Todo } from '../todos/todo.model';
 import { TodosService } from '../todos/todos.service';
 import { UserItemService } from '../users/user-item.service';
@@ -15,7 +14,7 @@ import { UserService } from '../users/user.service';
 export class PrivateComponent implements OnInit, OnDestroy {
   todos:Todo[] = []
   myTodos:Todo[] = []
-  myBudget:number
+  myBudget:number = 0
   executer_id:number
   users:User[]
   currentUser:User
@@ -37,9 +36,15 @@ export class PrivateComponent implements OnInit, OnDestroy {
     
     this.users = await this.userItemService.waitedUsers()
     this.executer_id = this.userService.getUserId()
-    this.userItemService.getContact(this.executer_id)
-    this.currentUser = this.userItemService.getContact(this.executer_id)
     this.myTodos = this.todoService.getTodoByExecuter(this.executer_id)
+    // calculating money
+    this.myTodos.forEach(todo=>{
+      if(todo.status === "complete"){
+        this.myBudget += todo.price
+      }
+    })
+    
+    
   }
   ngOnDestroy(): void {
       this.subscription.unsubscribe()
@@ -47,11 +52,4 @@ export class PrivateComponent implements OnInit, OnDestroy {
   }
 
 }
-// function myBudget(todos:Todo[]){
-//   var result=0;
-//   todos.forEach(todo=>{
-//     result += todo.price
-//   })
-//   return result
 
-// }

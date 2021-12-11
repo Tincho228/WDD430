@@ -1,27 +1,82 @@
-<!-- <div class="card" style="width: 18rem; margin-bottom:10px">
-    <img src="../../../assets/images/kidone.png" class="card-img-top" alt="image of {{todo.name}}">
-    <div class="card-body">
-      <h5 class="card-title">{{todo.name}}</h5>
-      <p class="card-text">{{todo.description}}</p>
-      <p class="badge badge-info" style="font-size: 30px;">${{todo.price}}</p>
-      <a class="btn btn-primary" style="cursor: pointer;">Go somewhere</a>
-    </div>
-  </div> -->
-  <div class="list-group-item  d-flex justify-content-between">
-    <a class="" routerLinkActive="active">{{todo.name}}
-      Description: {{todo.description}}  <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span></a>
+<div class="list-group-item " style="margin-bottom:10px">
   
-    <!-- Button trigger modal -->
-    <!-- <ng-container *ngIf="executer; else template">
-      <button class="btn btn-secondary" data-toggle="modal" [attr.data-target]="'#'+ todo.name" disabled>
-          {{executer.name}}´s got it!
-        </button>
-    </ng-container>
-    <ng-template #template>
-      <button class="btn btn-success" data-toggle="modal" [attr.data-target]="'#'+ todo.name">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          Do it!
-        </button>
-    </ng-template> -->
-    
+  <!-- Option incomplete -->
+  <div class="row d-flex justify-content-around"  *ngIf="todo.status==='incomplete'">
+    <div style="margin-bottom:20px">
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <div class="loader"></div>
+      <p class="text-secondary" style="font-size:20px">Completing....</p>
+    </div>
+    <div>
+      <p class="text-dark" style="font-size:30px">Are you<br> done?</p>
+      <button class="btn btn-success" data-toggle="modal" [attr.data-target]="'#modal'+ todo.id">YES</button>
+    </div>
   </div>
+
+  <!-- Option under approval -->
+  <div class="row d-flex justify-content-around" *ngIf="todo.status==='waiting'">
+    <div style="margin-bottom:20px">
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <img class="img-fluid" src="../../../assets/images/waiting.png" style="width:60px; height:auto"
+        alt="waiting image">
+      <p class="text-secondary" style="font-size:20px">Waiting approval...</p>
+    </div>
+    <div>
+      <p class="text-dark" style="font-size:30px">Almoust<br> done!!!</p>
+      <button class="btn btn-success" routerLink="/todos">Go for another</button>
+    </div>
+  </div>
+
+
+  <!-- Option completed -->
+  <div class="row d-flex justify-content-around" *ngIf="todo.status==='completed'">
+    <div style="margin-bottom:20px">
+      <h3 class="" routerLinkActive="active">{{todo.name}}
+      </h3>
+      <p>Description: {{todo.description}} </p>
+      <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
+    </div>
+    <div>
+      <img class="img-fluid" src="../../../assets/images/completed.png" style="width:60px; height:auto"
+        alt="completed image">
+      <p class="text-secondary" style="font-size:20px">Completed</p>
+    </div>
+    <div>
+      <p class="text-dark" style="font-size:30px">Congratulations!!!</p>
+      <a class="btn btn-success" routerLink="/todos" style="cursor:pointer" >Go for another</a>
+    </div>
+  </div>
+
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal{{todo.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:30px">
+          Finish the chore " {{todo.name}} "<br>
+          Are ayou sure?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="onFinish(todo.id)">Finish Chore</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

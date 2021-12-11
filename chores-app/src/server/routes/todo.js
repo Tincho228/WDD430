@@ -23,13 +23,14 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     
-    const {id, name, description, executer_id, price} = req.body
+    const {id, name, description, executer_id, price, status} = req.body
     const newTodo = new Todo ({
         id:id,
         name:name,
         description:description,
         executer_id:executer_id,
-        price:price
+        price:price,
+        status: status
     })
     newTodo.save()
     .then(createdTodo => {
@@ -54,6 +55,7 @@ router.put('/:id', (req, res, next) => {
   Todo.findOne({ id: req.params.id })
     .then(todo => {
       todo.executer_id = req.body.userId;
+      todo.status = req.body.status;
       Todo.updateOne({ id: req.params.id }, todo)
         .then(result => {
           res.status(204).json({
@@ -74,6 +76,7 @@ router.put('/:id', (req, res, next) => {
       });
     });
 });
+
 
 
 router.delete("/:id", (req, res, next) => {

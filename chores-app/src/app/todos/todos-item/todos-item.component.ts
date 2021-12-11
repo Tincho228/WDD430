@@ -29,8 +29,9 @@ export class TodosItemComponent implements OnInit {
     this.executer = this.userItemService.getContact(this.todo.executer_id)
   }
   onStart(todo_id){
+    const status = "incomplete"
     this.userId = this.userService.getUserId()
     this.originalTodo = this.todoService.getTodoById(todo_id)
-    this.todoService.startTodo(this.originalTodo,this.userId)
+    this.todoService.startTodo(this.originalTodo,this.userId, status)
   }
 }
