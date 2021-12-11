@@ -56,7 +56,6 @@
       <h3 class="" routerLinkActive="active">{{todo.name}}
       </h3>
       <p>Description: {{todo.description}} </p>
-      {{todo.status}}
       <span class="badge badge-info" style="font-size: 30px;">${{todo.price}}</span>
     </div>
     <div>
@@ -66,7 +65,7 @@
     <div>
       <ng-container *ngIf="executer;">
         <button class="btn btn-secondary" disabled>
-          {{executer.name}}´s got it!
+          {{executer.name}}s got it!
         </button>
       </ng-container>
     </div>

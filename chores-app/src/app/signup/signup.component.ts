@@ -18,7 +18,8 @@ export class SignupComponent implements OnInit {
   onSignup(form:NgForm){
     const value = form.value;
     this.id = Date.now()
-    var newUser = new User(this.id,value.name, value.password,false)
+    var imgUrl:string = "../../../assets/images/placeholder.png"
+    var newUser = new User(this.id,value.name, value.password,false,imgUrl)
     this.userService.signUp(newUser)
   }
 }

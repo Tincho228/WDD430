@@ -22,12 +22,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next) {
-    const {id, name, password, admin} = req.body
+    const {id, name, password, admin, imgUrl} = req.body
     const newUser = new User ({
         id:id,
         name:name,
         password:password,
-        admin:admin
+        admin:admin,
+        imgUrl:imgUrl
     })
     newUser.save()
     .then(createdUser => {

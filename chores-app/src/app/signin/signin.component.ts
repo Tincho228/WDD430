@@ -18,7 +18,8 @@ export class SigninComponent implements OnInit {
   }
   onSignin(form:NgForm){
     const value = form.value;
-    var newUser = new User(null,value.name, value.password,false)
+    var imgUrl:string = "../../../assets/images/kidone.png"
+    var newUser = new User(null,value.name, value.password,false, imgUrl)
     this.userService.signIn(newUser)
   }
 }

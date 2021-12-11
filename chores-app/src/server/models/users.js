@@ -4,7 +4,8 @@ const userSchema = mongoose.Schema({
    id: { type:Number },
    name: { type: String },
    password: { type: String },
-   admin: { type:Boolean, default:false }
+   admin: { type:Boolean, default:false },
+   imgUrl: { type:String }
 },{
    timestamps:true
 }
