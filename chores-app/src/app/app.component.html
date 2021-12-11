@@ -17,6 +17,9 @@
         </li>
       </ul>
       <ul class="navbar-nav " style="margin-left:auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="linkActive">Admin</a>
+        </li>
         <ng-container *ngIf="!userService.loggedIn();else loggedIn">
           <li class="nav-item">
             <a class="nav-link" routerLink="/signin" routerLinkActive="linkActive">Sign in</a>

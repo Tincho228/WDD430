@@ -16,6 +16,7 @@ import { TodosDetailComponent } from './todos/todos-detail/todos-detail.componen
 import { UserItemComponent } from './users/user-item/user-item.component';
 import { PrivateItemComponent } from './private/private-item/private-item.component';
 import { PrivateProfileComponent } from './private/private-profile/private-profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PrivateProfileComponent } from './private/private-profile/private-profi
     UserItemComponent,
     PrivateItemComponent,
     PrivateProfileComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,9 @@ import { User } from '../user.model';
 export class UserItemComponent implements OnInit {
   @Input()  user:User
   myBudget:number = 0
+  myCompleted:number = 0
+  myIncompleted:number = 0
+  myWaiting:number = 0
   todos:Todo[] = []
   subscription:Subscription
   constructor(
@@ -25,15 +28,24 @@ export class UserItemComponent implements OnInit {
         this.todos = todos
       }
     )
-    console.log(this.user.id)
     const myTodos = this.todoService.getTodoByExecuter(this.user.id)
-    // calculating money
+    
     myTodos.forEach(todo=>{
+      // calculating money
       if(todo.status === "completed"){
         this.myBudget += todo.price
+        this.myCompleted++
+      }
+      //calculating completed tasks
+      if(todo.status === "incomplete"){
+        this.myIncompleted++
+      }
+      if(todo.status === "waiting"){
+        this.myWaiting++
       }
     })
-    console.log(myTodos)
+    
+    
   }
   
     

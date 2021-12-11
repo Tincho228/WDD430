@@ -1,11 +1,10 @@
-<div class="card" style="width: 10rem; margin-bottom:10px">
+<div class="card" style="width: 12rem; margin:10px">
     <img src="{{user.imgUrl}}" class="card-img-top" alt="image of {{user.name}}">
     <div class="card-body">
       <h5 class="card-title">{{user.name}}</h5>
-      <p class="card-text text-info">Budget {{myBudget}} dollars</p>
-      <p class="card-text text-success">Completed tasks</p>
-      <p class="card-text text-warning">Waiting Tasks</p>
-      <p class="card-text text-danger">Incomplete Tasks</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <p class="card-text text-info text-center" ><span style="font-size:30px">${{myBudget}}</span></p>
+      <p class="card-text text-success">Completed tasks <span class="badge badge-success">{{myCompleted}}</span></p>
+      <p class="card-text text-warning">Waiting Tasks <span class="badge badge-warning">{{myWaiting}}</span></p>
+      <p class="card-text text-danger">Incomplete Tasks <span class="badge badge-danger">{{myIncompleted}}</span></p>
     </div>
   </div>

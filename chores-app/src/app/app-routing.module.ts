@@ -6,6 +6,7 @@ import { SignupComponent } from "./signup/signup.component";
 import { TodosComponent } from "./todos/todos.component";
 import { UsersComponent } from "./users/users.component";
 import { UserGuard } from "./user.guard";
+import { AdminComponent } from "./admin/admin.component";
 
 
 const appRoutes:Routes = [
@@ -34,6 +35,11 @@ const appRoutes:Routes = [
     { 
          path:'private', 
          component:PrivateComponent,
+         canActivate:[UserGuard]
+    },
+    {
+         path:'admin',
+         component:AdminComponent,
          canActivate:[UserGuard]
     }
 
