@@ -39,7 +39,7 @@ export class PrivateComponent implements OnInit, OnDestroy {
     this.myTodos = this.todoService.getTodoByExecuter(this.executer_id)
     // calculating money
     this.myTodos.forEach(todo=>{
-      if(todo.status === "complete"){
+      if(todo.status === "completed"){
         this.myBudget += todo.price
       }
     })

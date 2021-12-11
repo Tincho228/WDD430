@@ -19,7 +19,7 @@ export class UserItemComponent implements OnInit {
     const myTodos = this.todoService.getTodoByExecuter(this.user.id)
     // calculating money
     myTodos.forEach(todo=>{
-      if(todo.status === "complete"){
+      if(todo.status === "completed"){
         this.myBudget += todo.price
       }
     })
