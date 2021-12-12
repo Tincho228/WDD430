@@ -1,1 +1,99 @@
-<p>admin works!</p>
+<div class="container">
+  <div class="row justify-content-center" style="margin:30px 0px">
+    <div class="col-sm-12 col-lg-8">
+        <h1>Prueba</h1>
+      <table class="table table-info">
+        <thead>
+          <tr>
+            <th *ngFor="let column of headers">{{column}}</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of availableTodo">
+            <td class="table-info">
+              {{todo.name}}
+            </td>
+            <td class="table-info">
+                {{todo.description}}
+              </td>
+              <td class="table-info">
+                {{todo.executor_id}}
+              </td>
+              <td class="table-info">
+                {{todo.price}}
+              </td>
+              <td class="table-info">
+                {{todo.status}}
+              </td>
+              <td>
+                <button class="btn btn-info btn-small">Delete</button>
+              </td>  
+          </tr>
+        </tbody>
+      </table>
+      <h1>Available tasks</h1>
+      <table class="table table-info">
+        <thead>
+          <tr>
+            <th *ngFor="let column of headers">{{column}}</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of availableTodo">
+            <td class="table-info" *ngFor="let column of headers">
+              {{todo[column]}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h1>Completed tasks</h1>
+      <table class="table table-success">
+        <thead>
+          <tr>
+            <th *ngFor="let column of headers">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of completedTodo">
+            <td class="table-success" *ngFor="let column of headers">
+              {{todo[column]}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h1>Waiting approval tasks</h1>
+      <table class="table table-warning">
+        <thead>
+          <tr>
+            <th *ngFor="let column of headers">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of waitingTodo">
+            <td class="table-warning" *ngFor="let column of headers">
+              {{todo[column]}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h1>Incompleted tasks</h1>
+      <table class="table table-danger">
+        <thead>
+          <tr>
+            <th *ngFor="let column of headers">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of incompletedTodo">
+            <th class="table-danger" *ngFor="let column of headers">
+              {{todo[column]}}
+            </th>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+</div>
