@@ -17,6 +17,8 @@ import { UserItemComponent } from './users/user-item/user-item.component';
 import { PrivateItemComponent } from './private/private-item/private-item.component';
 import { PrivateProfileComponent } from './private/private-profile/private-profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminGuard } from './admin.guard';
+import { AdminUserComponent } from './admin/admin-user/admin-user.component';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { AdminComponent } from './admin/admin.component';
     UserItemComponent,
     PrivateItemComponent,
     PrivateProfileComponent,
-    AdminComponent
+    AdminComponent,
+    AdminUserComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { AdminComponent } from './admin/admin.component';
   ],
   providers: [
     UserGuard,
+    AdminGuard,
     {
       provide:HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

@@ -7,6 +7,8 @@ import { TodosComponent } from "./todos/todos.component";
 import { UsersComponent } from "./users/users.component";
 import { UserGuard } from "./user.guard";
 import { AdminComponent } from "./admin/admin.component";
+import { AdminGuard } from "./admin.guard";
+import { AdminUserComponent } from "./admin/admin-user/admin-user.component";
 
 
 const appRoutes:Routes = [
@@ -38,9 +40,14 @@ const appRoutes:Routes = [
          canActivate:[UserGuard]
     },
     {
-         path:'admin',
+         path:'admin-todo',
          component:AdminComponent,
-         canActivate:[UserGuard]
+         canActivate:[UserGuard, AdminGuard]
+    },
+    {
+         path:'admin-user',
+         component:AdminUserComponent,
+         canActivate:[UserGuard, AdminGuard]
     }
 
 ]

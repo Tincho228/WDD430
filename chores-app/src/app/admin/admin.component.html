@@ -40,7 +40,52 @@
           </tr>
         </tbody>
       </table>
-
+      <p>Add new Task <button class="btn btn-success" (click)="openForm()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></p>
+      <ng-container *ngIf="open">
+        
+        <div class="row justify-content-center" style="margin:30px 0">
+            <div class="col-md-4">
+            <h3 class="text-info">Have fun with a new Todo</h3>
+              <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="mb-3">
+                  <label for="exampleInputName" class="form-label">Nombre</label>
+                  <input [ngModel]= "todo?.name"
+                         type="text" 
+                         class="form-control" 
+                         id="exampleInputName" 
+                         name="name"
+                         aria-describedby="nameHelp" 
+                         autofocus
+                         required>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputDescription" class="form-label">Description</label>
+                  <input type="text" 
+                         class="form-control" 
+                         id="exampleInputDescription"
+                         name="description"
+                         required
+                         [ngModel]= "todo?.description">
+                </div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="mb-3">
+                            <label for="exampleInputPrice" class="form-label">Price</label>
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="exampleInputPrice"
+                                   name="price"
+                                   required
+                                   [ngModel]= "todo?.price">
+                          </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-block btn-info">Submit</button>
+              </form>
+            </div>
+          </div>
+      </ng-container>
       <!-- Completed todos -->
       <h1>Completed Todos</h1>
       <table class="table table-success">
@@ -68,7 +113,7 @@
               {{todo.status}}
             </td>
             <td>
-              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)" data-toggle="tooltip" data-placement="top" title="Delete"><img style="width:40px"
                   src="../../assets/images/trash.png" alt="Trash icon"></a>
               <!-- Button trigger modal -->
               <button id="openModalButton" type="button" [hidden]="true" class="btn btn-primary" data-toggle="modal"
@@ -108,9 +153,9 @@
               {{todo.status}}
             </td>
             <td>
-              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)" data-toggle="tooltip" data-placement="top" title="Delete"><img style="width:40px"
                   src="../../assets/images/trash.png" alt="Trash icon"></a>
-              <a style="cursor: pointer;" (click)="onModalApprove(todo.id, todo.name)"><img style="width:40px"
+              <a style="cursor: pointer;" (click)="onModalApprove(todo.id, todo.name, todo.executer_id)" data-toggle="tooltip" data-placement="top" title="Approve"><img style="width:40px"
                   src="../../assets/images/approved.png" alt="Approve icon"></a>
 
               <!-- Button trigger modal -->
@@ -151,7 +196,7 @@
               {{todo.status}}
             </td>
             <td>
-              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)" data-toggle="tooltip" data-placement="top" title="Delete"><img style="width:40px"
                   src="../../assets/images/trash.png" alt="Trash icon"></a>
               <!-- Button trigger modal -->
               <button id="openModalButton" type="button" [hidden]="true" class="btn btn-primary" data-toggle="modal"
@@ -163,7 +208,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- Modal -->
+      <!-- Modal Delete -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">

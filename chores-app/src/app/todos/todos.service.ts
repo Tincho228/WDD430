@@ -101,6 +101,7 @@ export class TodosService {
     )
   }
   approveTodo(originalTodo:Todo, userId:number, status:string) {
+    console.log(originalTodo, userId, status)
     if (!originalTodo || !userId || !status) {
       return;
     }
@@ -117,7 +118,6 @@ export class TodosService {
         //Converting into an object
         this.todos[pos] = newTodo
         this.documentListChangedEvent.next(this.todos.slice())
-        this.router.navigate(['/admin'])
       },
       (
         (error:any)=>{
@@ -125,6 +125,27 @@ export class TodosService {
         }
       )
     )
+  }
+  addTodo(newTodo:Todo){
+    
+    if (!(newTodo.id) || !(newTodo.name) || !(newTodo.description) ) {
+      return;
+    }
+    // after the response 
+    return this.http.post<Todo>(this.URL, {newTodo:newTodo})
+    .subscribe(
+      (responseData) => {
+        
+        this.todos.push(newTodo);
+        this.documentListChangedEvent.next(this.todos.slice())
+      },
+      (
+        (error:any)=>{
+          console.log(error)
+        }
+      )
+    )
+    
   }
   deleteTodo(todoId){
     if(!todoId){

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Todo } from '../todos/todo.model';
 import { TodosService } from '../todos/todos.service';
@@ -17,6 +18,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   completedTodo:Todo[]=[]
   incompletedTodo:Todo[]=[]
   waitingTodo:Todo[]=[]
+  open:Boolean = false
   @ViewChild('template') actionButton:ElementRef
 
   headers = ["name", "description","executer_id","price","status","accions"]
@@ -40,6 +42,19 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.filterTodo()
     
   }
+  openForm(){
+    this.open= true;
+  }
+  onSubmit(form:NgForm){
+    const value = form.value;
+    const id = Date.now()
+    const status = "available"
+    var newUser = new Todo(id,value.name, value.description, null, value.price ,status)
+
+    this.todoService.addTodo(newUser)
+    //close de form
+    this.open = false
+  }
   onModalDelete(todoId:number, todoName:string){
     // Fill the Modal
     document.getElementById("exampleModalTitle").textContent =`Delete Task`
@@ -54,23 +69,25 @@ export class AdminComponent implements OnInit, OnDestroy {
     const todoId = e.target.dataset.id
     this.todoService.deleteTodo(todoId)
   }
-  onModalApprove(todoId:number, todoName:string){
-    console.log(todoId, todoName)
+  onModalApprove(todoId:number, todoName:string, todoExecuter:number){
     // Fill the Modal
     document.getElementById("exampleModalTitle").textContent =`Approve Task`
     document.getElementById("exampleModalContent").textContent =`Do you want to approve ${todoName}?`
-    this.actionButton.nativeElement.innerHTML = `<button type="button" id="my-button" data-id=${todoId} class="btn btn-secondary" data-dismiss="modal" (click)="onApprove(e)">Approve</button>`
+    this.actionButton.nativeElement.innerHTML = `<button type="button" id="my-button" data-executer=${todoExecuter} data-id=${todoId} class="btn btn-secondary" data-dismiss="modal" (click)="onApprove(e)">Approve</button>`
     this.elementRef.nativeElement.querySelector('#my-button').addEventListener('click', this.onApprove.bind(this));
     document.getElementById("openModalButton").click()
   }
   onApprove(e){
     const status = "completed"
     const todoId = e.target.dataset.id
-    const userId = this.userService.getUserId()
+    const executer = e.target.dataset.executer
+    // set the winner´s id
     const originalTodo = this.todoService.getTodoById(parseInt(todoId))
-    this.todoService.approveTodo(originalTodo, userId, status)
+    console.log(executer)
+    this.todoService.approveTodo(originalTodo, executer, status)
 
   }
+
   ngOnDestroy(): void {
       this.subscription.unsubscribe()
   }

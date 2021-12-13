@@ -22,8 +22,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+    const id = req.body.newTodo.id
+    const name = req.body.newTodo.name
+    const description = req.body.newTodo.description
+    const executer_id = req.body.newTodo.executer_id
+    const price = req.body.newTodo.price
+    const status = req.body.newTodo.status
     
-    const {id, name, description, executer_id, price, status} = req.body
     const newTodo = new Todo ({
         id:id,
         name:name,
