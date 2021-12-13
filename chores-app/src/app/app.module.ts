@@ -18,6 +18,7 @@ import { PrivateItemComponent } from './private/private-item/private-item.compon
 import { PrivateProfileComponent } from './private/private-profile/private-profile.component';
 import { AdminComponent } from './admin/admin.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,7 @@ import { AdminComponent } from './admin/admin.component';
     UserItemComponent,
     PrivateItemComponent,
     PrivateProfileComponent,
-    AdminComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

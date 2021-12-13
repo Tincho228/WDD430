@@ -100,8 +100,55 @@ export class TodosService {
       )
     )
   }
-  
+  approveTodo(originalTodo:Todo, userId:number, status:string) {
+    if (!originalTodo || !userId || !status) {
+      return;
+    }
+    const pos = this.todos.findIndex(d => d.id === originalTodo.id);
+    if (pos < 0) {
+      return;
+    }
+    return this.http.put<Todo>(this.URL + "/"+ originalTodo.id, {userId:userId, status:status})
+    .subscribe(
+      (responseData) => {
+        const newTodo = originalTodo
+        newTodo.status =status
+        newTodo.executer_id = userId
+        //Converting into an object
+        this.todos[pos] = newTodo
+        this.documentListChangedEvent.next(this.todos.slice())
+        this.router.navigate(['/admin'])
+      },
+      (
+        (error:any)=>{
+          console.log(error)
+        }
+      )
+    )
+  }
+  deleteTodo(todoId){
+    if(!todoId){
+      return;
+    }
+    const pos = this.todos.findIndex(todo=>todo.id === parseInt(todoId))
+    if (pos < 0) {
+      return;
+    }
+    return this.http.delete(this.URL + "/"+ todoId)
+    .subscribe(
+      (responseData) => {
+        this.todos.splice(pos, 1);
+        this.documentListChangedEvent.next(this.todos.slice())
+      },
+      (
+        (error:any)=>{
+          console.log(error)
+        }
+      )
+    )
 
+  }
+  
 }
 
   

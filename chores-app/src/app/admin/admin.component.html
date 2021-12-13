@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row justify-content-center" style="margin:30px 0px">
     <div class="col-sm-12 col-lg-8">
-        <h1>Prueba</h1>
+      <!-- Available todos -->
+      <h1>Available Todos</h1>
       <table class="table table-info">
         <thead>
           <tr>
@@ -9,91 +10,180 @@
 
           </tr>
         </thead>
-        <tbody>
+        <tbody class="justify-content-center">
           <tr *ngFor="let todo of availableTodo">
             <td class="table-info">
               {{todo.name}}
             </td>
             <td class="table-info">
-                {{todo.description}}
-              </td>
-              <td class="table-info">
-                {{todo.executor_id}}
-              </td>
-              <td class="table-info">
-                {{todo.price}}
-              </td>
-              <td class="table-info">
-                {{todo.status}}
-              </td>
-              <td>
-                <button class="btn btn-info btn-small">Delete</button>
-              </td>  
+              {{todo.description}}
+            </td>
+            <td class="table-info">
+              {{todo.executer_id}}
+            </td>
+            <td class="table-info">
+              {{todo.price}}
+            </td>
+            <td class="table-info">
+              {{todo.status}}
+            </td>
+            <td>
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+                  src="../../assets/images/trash.png" alt="Trash icon"></a>
+              <!-- Button trigger modal -->
+              <button id="openModalButton" type="button" [hidden]="true" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModal">
+                Launch hidden modal
+              </button>
+
+            </td>
           </tr>
         </tbody>
       </table>
-      <h1>Available tasks</h1>
-      <table class="table table-info">
+
+      <!-- Completed todos -->
+      <h1>Completed Todos</h1>
+      <table class="table table-success">
         <thead>
           <tr>
             <th *ngFor="let column of headers">{{column}}</th>
 
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let todo of availableTodo">
-            <td class="table-info" *ngFor="let column of headers">
-              {{todo[column]}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h1>Completed tasks</h1>
-      <table class="table table-success">
-        <thead>
-          <tr>
-            <th *ngFor="let column of headers">{{column}}</th>
-          </tr>
-        </thead>
-        <tbody>
+        <tbody class="justify-content-center">
           <tr *ngFor="let todo of completedTodo">
-            <td class="table-success" *ngFor="let column of headers">
-              {{todo[column]}}
+            <td class="table-success">
+              {{todo.name}}
+            </td>
+            <td class="table-success">
+              {{todo.description}}
+            </td>
+            <td class="table-success">
+              {{todo.executer_id}}
+            </td>
+            <td class="table-success">
+              {{todo.price}}
+            </td>
+            <td class="table-success">
+              {{todo.status}}
+            </td>
+            <td>
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+                  src="../../assets/images/trash.png" alt="Trash icon"></a>
+              <!-- Button trigger modal -->
+              <button id="openModalButton" type="button" [hidden]="true" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModal">
+                Launch hidden modal
+              </button>
+
             </td>
           </tr>
         </tbody>
       </table>
-      <h1>Waiting approval tasks</h1>
+
+      <!-- Waiting todos -->
+      <h1>Waiting for approval Todos</h1>
       <table class="table table-warning">
         <thead>
           <tr>
             <th *ngFor="let column of headers">{{column}}</th>
+
           </tr>
         </thead>
-        <tbody>
+        <tbody class="justify-content-center">
           <tr *ngFor="let todo of waitingTodo">
-            <td class="table-warning" *ngFor="let column of headers">
-              {{todo[column]}}
+            <td class="table-warning">
+              {{todo.name}}
+            </td>
+            <td class="table-warning">
+              {{todo.description}}
+            </td>
+            <td class="table-warning">
+              {{todo.executer_id}}
+            </td>
+            <td class="table-warning">
+              {{todo.price}}
+            </td>
+            <td class="table-warning">
+              {{todo.status}}
+            </td>
+            <td>
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+                  src="../../assets/images/trash.png" alt="Trash icon"></a>
+              <a style="cursor: pointer;" (click)="onModalApprove(todo.id, todo.name)"><img style="width:40px"
+                  src="../../assets/images/approved.png" alt="Approve icon"></a>
+
+              <!-- Button trigger modal -->
+              <button id="openModalButton" type="button" [hidden]="true" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModal">
+                Launch hidden modal
+              </button>
+
             </td>
           </tr>
         </tbody>
       </table>
-      <h1>Incompleted tasks</h1>
+
+      <!-- Incompleted todos -->
+      <h1>Incompleted Todos</h1>
       <table class="table table-danger">
         <thead>
           <tr>
             <th *ngFor="let column of headers">{{column}}</th>
+
           </tr>
         </thead>
-        <tbody>
+        <tbody class="justify-content-center">
           <tr *ngFor="let todo of incompletedTodo">
-            <th class="table-danger" *ngFor="let column of headers">
-              {{todo[column]}}
-            </th>
+            <td class="table-danger">
+              {{todo.name}}
+            </td>
+            <td class="table-danger">
+              {{todo.description}}
+            </td>
+            <td class="table-danger">
+              {{todo.executer_id}}
+            </td>
+            <td class="table-danger">
+              {{todo.price}}
+            </td>
+            <td class="table-danger">
+              {{todo.status}}
+            </td>
+            <td>
+              <a style="cursor: pointer;" (click)="onModalDelete(todo.id, todo.name)"><img style="width:40px"
+                  src="../../assets/images/trash.png" alt="Trash icon"></a>
+              <!-- Button trigger modal -->
+              <button id="openModalButton" type="button" [hidden]="true" class="btn btn-primary" data-toggle="modal"
+                data-target="#exampleModal">
+                Launch hidden modal
+              </button>
+
+            </td>
           </tr>
         </tbody>
       </table>
-      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalTitle">---</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="exampleModalContent" class="text-center" style="font-size:30px"></div>
+            </div>
+            <div class="modal-footer">
+              <div #template></div>
+              <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
