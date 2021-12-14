@@ -83,7 +83,6 @@ export class AdminComponent implements OnInit, OnDestroy {
     const executer = e.target.dataset.executer
     // set the winner´s id
     const originalTodo = this.todoService.getTodoById(parseInt(todoId))
-    console.log(executer)
     this.todoService.approveTodo(originalTodo, executer, status)
 
   }

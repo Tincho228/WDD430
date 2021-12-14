@@ -126,7 +126,31 @@ router.get('/private-task', verifyToken, function(req, res, next) {
         }
 ])
 });
-
+router.put('/:id', (req, res, next) => {
+  
+    User.findOne({ id: req.params.id })
+      .then(user => {
+        user.admin = true;
+        User.updateOne({ id: req.params.id }, user)
+          .then(result => {
+            res.status(204).json({
+              message: 'Document updated successfully'
+            })
+          })
+          .catch(error => {
+             res.status(500).json({
+             message: 'An error occurred',
+             error: error
+           });
+          });
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: 'Document not found.',
+          error: { document: 'Document not found'}
+        });
+      });
+  });
 router.delete("/:id", (req, res, next) => {
     User.findOne({ id: req.params.id })
       .then(user => {

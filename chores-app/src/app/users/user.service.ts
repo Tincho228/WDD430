@@ -13,6 +13,9 @@ export class UserService {
     ) { }
 
   signUp(user:User){
+    if(!user.name|| !user.password){
+      return;
+    }
     return this.http.post<{ message: string, user: Document, token:string }>(this.URL + "/signup", user)
     .subscribe(
       (responseData) => {

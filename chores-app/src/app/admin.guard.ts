@@ -20,7 +20,7 @@ export class AdminGuard implements CanActivate {
     if(user.admin){
       return true
     }
-    this.router.navigate(['/signin'])
+    this.router.navigate(['/users'])
     return false
   }
   

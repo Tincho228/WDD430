@@ -60,7 +60,31 @@ export class UserItemService {
       }
     )
   }
-
+  userActivate(originalUser:User, userId:number, status:boolean){
+    if(!userId){
+      return;
+    }
+    const pos = this.users.findIndex(d => d.id === originalUser.id);
+    if (pos < 0) {
+      return;
+    }
+    console.log(pos)
+    return this.http.put<User>(this.URL + "/"+ userId, {status:status})
+    .subscribe(
+      (responseData) => {
+        const newUser = originalUser
+        newUser.admin = status
+        //Converting into an object
+        this.users[pos] = newUser
+        this.userListChangedEvent.next(this.users.slice())
+      },
+      (
+        (error:any)=>{
+          console.log(error)
+        }
+      )
+    )
+  }
   getContact(id:number):User{
     if(this.users.filter(contact => contact.id === id)[0]){
       return this.users.filter(contact => contact.id === id)[0];
