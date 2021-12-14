@@ -92,6 +92,19 @@ export class UserItemService {
       return null;
     }
   }
+  getUser(id:number){
+    return new Promise(
+      (resolve, reject)=>{
+        if(this.users.filter(contact => contact.id === id)[0]){
+          resolve(this.users.filter(contact => contact.id === id)[0]);
+        }else{
+          return null;
+        }   
+      
+      }
+    )
+  }
+  
  
 }
 

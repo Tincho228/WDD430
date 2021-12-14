@@ -43,8 +43,8 @@
       <p>Add new Task <button class="btn btn-success" (click)="openForm()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></p>
       <ng-container *ngIf="open">
         
-        <div class="row justify-content-center" style="margin:30px 0">
-            <div class="col-md-4">
+        <div class="row" style="margin:30px 0">
+            <div class="col-sm-12 col-md-8">
             <h3 class="text-info">Have fun with a new Todo</h3>
               <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="mb-3">
@@ -56,7 +56,8 @@
                          name="name"
                          aria-describedby="nameHelp" 
                          autofocus
-                         required>
+                         required
+                         #name="ngModel">
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputDescription" class="form-label">Description</label>
@@ -65,23 +66,27 @@
                          id="exampleInputDescription"
                          name="description"
                          required
-                         [ngModel]= "todo?.description">
-                </div>
-                <div class="row">
-                    <div class="col col-sm-6">
-                        <div class="mb-3">
-                            <label for="exampleInputPrice" class="form-label">Price</label>
-                            <input type="number" 
-                                   class="form-control" 
-                                   id="exampleInputPrice"
-                                   name="price"
-                                   required
-                                   [ngModel]= "todo?.price">
-                          </div>
-                    </div>
+                         [ngModel]= "todo?.description"
+                         #description="ngModel">
                 </div>
                 
-                <button type="submit" class="btn btn-block btn-info">Submit</button>
+                <div class="mb-3">
+                    <label for="exampleInputPrice" class="form-label">Price</label>
+                    <input type="number" 
+                            class="form-control" 
+                            id="exampleInputPrice"
+                            name="price"
+                            required
+                            [ngModel]= "todo?.price"
+                            #price="ngModel">
+                </div>
+                <!-- Alert Message -->
+                <div class="alert alert-danger" *ngIf="(!name.valid && name.touched) || (!description.valid && description.touched) || (!price.valid && price.touched)">
+                    All fields are required
+                </div>
+                
+                <button type="submit" class="btn btn-block btn-info" [disabled]="!f.valid">Submit</button>
+                <button type="button" class="btn btn-block btn-primary" (click)="closeForm()">Cancel</button>
               </form>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TodosService } from 'src/app/todos/todos.service';
 import { UserItemService } from 'src/app/users/user-item.service';
 import { User } from 'src/app/users/user.model';
 
@@ -13,11 +13,11 @@ export class AdminUserComponent implements OnInit, OnDestroy {
   @ViewChild('template') actionButton:ElementRef
   users:User[]=[]
   subscription:Subscription
-  headers =["id","name","admin","action"]
+  headers =["id","name","admin","delete","activate"]
   constructor(
     private userItemService:UserItemService,
     private elementRef:ElementRef,
-    private todoService:TodosService
+    private route:ActivatedRoute
   ) { }
 
   async ngOnInit() {

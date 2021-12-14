@@ -45,6 +45,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   openForm(){
     this.open= true;
   }
+  closeForm(){
+    this.open = false;
+  }
   onSubmit(form:NgForm){
     const value = form.value;
     const id = Date.now()

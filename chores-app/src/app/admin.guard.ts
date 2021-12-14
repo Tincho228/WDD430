@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate {
     private router:Router,
     private userItemService: UserItemService
   ){}
-  canActivate():boolean{
+   canActivate():boolean{
     const userId = this.userService.getUserId()
     const user = this.userItemService.getContact(userId)
     if(user.admin){
@@ -23,5 +23,4 @@ export class AdminGuard implements CanActivate {
     this.router.navigate(['/users'])
     return false
   }
-  
 }

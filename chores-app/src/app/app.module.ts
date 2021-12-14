@@ -19,6 +19,7 @@ import { PrivateProfileComponent } from './private/private-profile/private-profi
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './admin.guard';
 import { AdminUserComponent } from './admin/admin-user/admin-user.component';
+import { UserResolver } from './users/user.resolver';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { AdminUserComponent } from './admin/admin-user/admin-user.component';
   providers: [
     UserGuard,
     AdminGuard,
+    UserResolver,
     {
       provide:HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

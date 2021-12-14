@@ -9,6 +9,7 @@ import { UserGuard } from "./user.guard";
 import { AdminComponent } from "./admin/admin.component";
 import { AdminGuard } from "./admin.guard";
 import { AdminUserComponent } from "./admin/admin-user/admin-user.component";
+import { UserResolver } from "./users/user.resolver";
 
 
 const appRoutes:Routes = [

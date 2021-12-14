@@ -12,7 +12,8 @@
                    name="name"
                    aria-describedby="nameHelp" 
                    autofocus
-                   required>
+                   required
+                   #name="ngModel">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -21,10 +22,14 @@
                    id="exampleInputPassword1"
                    name="password"
                    required
-                   [ngModel]= "user?.password">
+                   [ngModel]= "user?.password"
+                   #password="ngModel">
           </div>
-          
-          <button type="submit" class="btn btn-block btn-info">Submit</button>
+          <!-- Alert Message -->
+          <div class="alert alert-danger" *ngIf="(!name.valid && name.touched) || (!password.valid && password.touched)">
+            All fields are required
+        </div>
+          <button type="submit" class="btn btn-block btn-info" [disabled]="!f.valid">Submit</button>
         </form>
       </div>
     </div>
