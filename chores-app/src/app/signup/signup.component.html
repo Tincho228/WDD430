@@ -19,7 +19,7 @@
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" 
                    class="form-control" 
-                   id="exampleInputPassword1"
+                   id="exampleInputPassword"
                    name="password"
                    required
                    [ngModel]= "user?.password"
@@ -30,18 +30,21 @@
             <input type="password" 
                    class="form-control" 
                    id="exampleInputPassword1"
-                   name="passwordRepeat"
+                   name="confirm_password"
                    required
                    [ngModel]= "user?.password"
                    ngValidateEqual="password"
-                   #passwordRepeat="ngModel">
+                   #confirmPassword="ngModel">
           </div>
           <!-- Alert Message -->
-          <div class="alert alert-danger" *ngIf="(passwordRepeat.valid)">
-            Passwords must be equal
+          <div class="alert alert-danger" *ngIf="(confirmPassword.dirty || confirmPassword.touched) &&
+          confirmPassword.invalid">
+            <span *ngIf="confirmPassword.hasError('notEqual') &&
+            password.valid">Passwords must be equal</span>
+            
           </div>
           <!-- Alert Message -->
-          <div class="alert alert-danger" *ngIf="(!name.valid && name.touched) || (!password.valid && password.touched) || (!passwordRepeat.valid && passwordRepeat.touched)">
+          <div class="alert alert-danger" *ngIf="(!name.valid && name.touched) || (!password.valid && password.touched) || (!confirmPassword.valid && confirmPassword.touched)">
             All fields are required
           </div>
           

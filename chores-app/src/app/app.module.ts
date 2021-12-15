@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './admin.guard';
 import { AdminUserComponent } from './admin/admin-user/admin-user.component';
 import { UserResolver } from './users/user.resolver';
+import { ValidateEqualModule } from  'ng-validate-equal';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { UserResolver } from './users/user.resolver';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ValidateEqualModule
   ],
   providers: [
     UserGuard,

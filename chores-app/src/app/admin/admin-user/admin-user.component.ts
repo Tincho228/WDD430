@@ -21,12 +21,17 @@ export class AdminUserComponent implements OnInit, OnDestroy {
   ) { }
 
   async ngOnInit() {
-    this.users = await this.userItemService.waitedUsers()
-    this.subscription = this.userItemService.userListChangedEvent.subscribe(
-      (users)=>{
-        this.users = users
+    this.route.data.subscribe(
+      (data:Data)=>{
+        this.users = data['users']
       }
     )
+    // this.users = await this.userItemService.waitedUsers()
+    // this.subscription = this.userItemService.userListChangedEvent.subscribe(
+    //   (users)=>{
+    //     this.users = users
+    //   }
+    // )
   }
   onModalDelete(userId:number, userName:string){
       // Fill the Modal

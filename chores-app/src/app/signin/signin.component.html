@@ -28,7 +28,10 @@
           <!-- Alert Message -->
           <div class="alert alert-danger" *ngIf="(!name.valid && name.touched) || (!password.valid && password.touched)">
             All fields are required
-        </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="error">
+            {{error}}
+          </div>
           <button type="submit" class="btn btn-block btn-info" [disabled]="!f.valid">Submit</button>
         </form>
       </div>

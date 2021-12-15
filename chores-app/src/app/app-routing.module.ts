@@ -47,7 +47,7 @@ const appRoutes:Routes = [
     },
     {
          path:'admin-user',
-         component:AdminUserComponent,
+         component:AdminUserComponent,  resolve:{users:UserResolver},
          canActivate:[UserGuard, AdminGuard]
     }
 
